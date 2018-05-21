@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>About GTT</title>
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="build/app.css">
+    <script type="text/javascript" src="render.js"></script>
+</head>
+<body class="window">
+
+<div id="app">
+    <div class="container">
+        <div>
+            <h3>GTT</h3>
+            GitLab Time Tracker<br>
+            <small>Version {{ version }}</small>
+        </div>
+
+        <hr>
+
+        <p>Developed by <a @click.prevent="open('https://kris.cool')" href="#">Kris Siepert</a><br>
+            <a href="#" @click.prevent="open('mailto:gtt@kris.cool')">Click here</a> for contact and support.</p>
+
+        <hr>
+
+        <h6>Uses the following Open Source Software:</h6>
+
+        <ul class="licenses">
+            <li>Electron by GitHub Inc. - <a href="#"
+                                             @click.prevent="open('https://github.com/electron/electron/blob/master/LICENSE')">License</a>
+            </li>
+            <li>moment by JS Foundation and other contributors - <a href="#"
+                                                                    @click.prevent="open('https://github.com/moment/moment/blob/develop/LICENSE')">License</a>
+            </li>
+            <li>vue by Evan You - <a href="#" @click.prevent="open('https://github.com/vuejs/vue/blob/dev/LICENSE')">License</a>
+            </li>
+            <li>vue-resource by steffans - <a href="#"
+                                              @click.prevent="open('https://github.com/pagekit/vue-resource/blob/develop/LICENSE')">License</a>
+            </li>
+            <li>vue-select by Jeff Safal & vue-select contributors - <a href="#"
+                                                                        @click.prevent="open('https://github.com/sagalbot/vue-select/blob/master/LICENSE.md')">License</a>
+            </li>
+            <li>vue-js-toggle-button by Yev Vlasenko - <a href="#"
+                                                          @click.prevent="open('https://github.com/euvl/vue-js-toggle-button/blob/master/LICENSE')">License</a>
+            </li>
+            <li>milligram-stylus by CJ Patoilo - <a href="#"
+                                                    @click.prevent="open('https://github.com/milligram/milligram-stylus/blob/master/license')">License</a>
+            </li>
+            <li>stylus by Automattic - <a href="#"
+                                          @click.prevent="open('https://github.com/stylus/stylus/blob/dev/LICENSE')">License</a>
+            </li>
+            <li>stylus-loader by Kyle Robinson Young - <a href="#"
+                                                          @click.prevent="open('https://github.com/shama/stylus-loader/blob/master/LICENSE')">License</a>
+            </li>
+            <li>laravel-mix by Jeffrey Way - <a href="#"
+                                                @click.prevent="open('https://github.com/JeffreyWay/laravel-mix/blob/master/LICENSE')">License</a>
+            </li>
+            <li>
+                chokidar by Paul Miller & Elan Shanker - <a href="#"
+                                                            @click.prevent="open('https://github.com/paulmillr/chokidar#license')">License</a>
+            </li>
+            <li>
+                vuejs-datetimepicker by Tosin Adeoye <a href="#"
+                                                        @click.prevent="open('https://github.com/tjohnn/vuejs-datetimepicker/blob/master/LICENSE')">License</a>
+            </li>
+            <li>GitLab Time Tracker by Kris Siepert - <a href="#"
+                                                         @click.prevent="open('https://github.com/kriskbx/gitlab-time-tracker/blob/master/LICENSE')">License</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript" src="build/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>List of time records</title>
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="build/app.css">
+    <script type="text/javascript" src="render.js"></script>
+</head>
+<body class="window white">
+
+<div id="app">
+    <div ref="log"></div>
+
+    <div class="container" v-if="!loadingLog && log">
+        <table class="log">
+            <thead>
+            <th>day</th>
+            <th>timeframe</th>
+            <th>duration</th>
+            <th>project</th>
+            <th>type</th>
+            <th>id</th>
+            </thead>
+            <tr v-for="day in days">
+                <td class="day">
+                    <p>{{ moment(day).format('MMMM Do YYYY') }}</p>
+                    <small>{{ human(log.times[day]) }}</small>
+                </td>
+                <td>
+                    <table>
+                        <tr v-for="frame in frames[day]">
+                            <td>
+                                {{ moment(frame.start).format('HH:mm') }} - {{ moment(frame.stop).format('HH:mm') }}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr v-for="frame in frames[day]">
+                            <td>
+                                {{ human(parseInt(moment(frame.stop).diff(frame.start) / 1000)) }}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr v-for="frame in frames[day]">
+                            <td>
+                                {{ frame.project }}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr v-for="frame in frames[day]">
+                            <td>
+                                {{ frame.resource.type }}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr v-for="frame in frames[day]">
+                            <td>
+                                {{ frame.resource.id }}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript" src="build/app.js"></script>
+</body>

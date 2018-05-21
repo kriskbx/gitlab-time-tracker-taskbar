@@ -1,0 +1,47 @@
+variables:
+ GITLAB_CONTAINER_IMAGE: registry.gitlab.com/kriskbx/gitlab-time-tracker-taskbar:latest
+
+stages:
+  - build
+
+build:linux:
+  image: $GITLAB_CONTAINER_IMAGE
+  stage: build
+  dependencies:
+  - dependencies
+  artifacts:
+    paths:
+    - out/make
+  script:
+  - yarn install
+  - yarn run make
+
+build:win:
+  stage: build
+  dependencies:
+  - dependencies
+  artifacts:
+    paths:
+    - out/make
+  script:
+  - yarn install
+  - yarn run make
+  tags:
+  - windows
+  - electron-forge
+  - node
+
+build:osx:
+  stage: build
+  dependencies:
+  - dependencies
+  artifacts:
+    paths:
+    - out/make
+  script:
+  - yarn install
+  - yarn run make
+  tags:
+  - osx
+  - electron-forge
+  - node

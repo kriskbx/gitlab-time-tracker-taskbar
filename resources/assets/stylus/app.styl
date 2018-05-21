@@ -1,0 +1,298 @@
+$color-red = #F8561E
+$color-white = #ffffff
+$color-gray = #cecece
+$color-gray = #909090
+$color-light-gray = #e6e6e6
+$color-middle-gray = #cbcbcb
+$color-mac-gray = #E7E7E7
+$color-bluish = #bfcbd9
+$color-black = #000
+$border-radius = .7rem
+
+color-primary = $color-red
+@import "./../../../node_modules/milligram-stylus/src/milligram.styl"
+
+html
+  height: 100%
+  padding: 0
+
+body
+  height: 25.4rem  
+  padding: 0 10px
+  overflow: visible
+  border-bottom-left-radius: $border-radius
+  border-bottom-right-radius: $border-radius
+  background: transparent
+
+body, html  
+  border: 0
+  margin: 0
+
+#app  
+  position: relative
+  height: 100%  
+  div.triangle
+    display: none
+    &.bottom
+      transform: rotate(180deg)
+  &.mac, &.linux
+    & > .triangle.top
+      display: block
+  &.win
+    & > .triangle.bottom
+      display: block
+
+.wrapper
+  display: flex
+  flex-direction: column
+  height: calc(100% - 3rem)
+  overflow-y: visible
+  overflow-x: hidden
+  box-shadow: 0 0 .2rem rgba(0,0,0,0.5)
+
+.settings
+  line-height: 1.2
+
+.triangle
+  text-align: center
+  height: 1.5rem
+  filter: drop-shadow(0 0 2px rgba(0,0,0,0.5))
+  &.bottom
+    transform: rotate(180deg)
+    display: none
+  svg
+    height: 1.5rem
+    width: auto
+    display: inline-block
+  .triangle
+    fill: $color-light-gray
+
+.vertical-center
+  display: flex
+  align-items: center
+
+.panel
+  background: $color-light-gray
+  position: relative
+  padding: .8rem 1rem
+
+.content
+  background: $color-white
+  flex: 1
+
+  .track
+    padding: 1rem
+    position: absolute
+    width: 100%
+
+    .step
+      margin-bottom: 1rem
+
+    .toggle
+      margin-right: 1.4rem
+      margin-top: .65rem
+      float: right
+
+    .refresh
+      color: $color-middle-gray
+      font-size: 1.4rem
+      margin-top: .7rem
+      float: right
+      display: inline-block
+
+      &.disabled
+        opacity: 0.7
+        pointer-events: none
+        cursor: none
+
+      & > .fa
+        cursor: pointer
+
+    .v-select
+      &.project
+        margin-right: 2.5rem
+      &.resource
+        margin-right: 10rem
+      font-size: 1.4rem
+      &:not(.open) > .dropdown-toggle
+        overflow: hidden
+      .dropdown-toggle
+        position: relative
+        & > input[type=search]
+          width: 100% !important
+          font-size: 1.2rem
+          position: absolute
+          top: 0
+          left: 0
+          right: 0
+          bottom: 0
+        &:before
+          content: ''
+          display: inline-block
+          width: 1px
+          height: 28px
+
+      .selected-tag
+        background-color: transparent
+        border: none
+        margin-right: 0
+        max-width: calc(100% - 3rem)
+        white-space: nowrap
+        overflow: hidden
+        text-overflow: ellipsis
+        font-size: 1.2rem
+        padding: .2rem 0 0 .5rem
+        left: 0
+
+      li
+        font-size: 1.2rem
+        max-width: 100%
+        overflow: hidden
+        line-height: 1.4 !important
+        margin: 0 !important
+
+        &:last-child
+          margin-bottom: 0;
+
+        &.highlight > a
+          background-color: $color-bluish !important
+          color: $color-black !important
+        & > a
+          white-space: normal
+          color: $color-dark-gray
+          margin: 0
+          padding: .8rem .5rem
+
+.footer
+  border-bottom-left-radius: $border-radius
+  border-bottom-right-radius: $border-radius
+  border-top: .1rem solid $color-gray
+  display: flex
+  align-items: center
+
+  .spinner
+    height: 1.301rem
+    font-size: 1.3rem
+    margin-right: 1rem
+
+  .label
+    font-size: 1.2rem
+    line-height: 1.2
+    .time
+      margin-legt: .5rem
+      font-style: italic
+      font-size: 85%
+    span
+      display: inline-block
+      margin-right: .1rem
+
+.track-buttons
+  display: flex
+  justify-content: space-between
+  margin-bottom: 0 !important
+  margin-top: 1.5rem
+  & > .button
+    flex: 0 0 auto
+    width: 31%
+    height: 3rem
+    line-height: 1
+    padding: 0
+    margin: 0
+    border: 0
+    &:hover
+      background: $color-gray !important
+    &.start
+      background: rgb(117, 199, 145)
+    &.stop
+      background: rgb(191, 203, 217)
+    &:first-child
+      margin-left: 0
+    &:last-child
+      margin-right: 0
+    &.working, &.disabled
+      pointer-events: none
+      opacity: .3
+      background: #afafaf
+      border: 1px solid transparent
+
+    &.working
+      & > i:before
+        content: "\f021"
+
+.window
+  background: $color-mac-gray
+  color: $color-black
+  padding: 2rem 0
+  font-size: 1.4rem
+  &.white
+    background: $color-white
+
+  .fieldset
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    .input
+      margin-bottom: 1.2rem
+      flex: 0 0 70%
+      max-width: 70%
+      input[type='email'], input[type='number'], input[type='password'], input[type='search'], input[type='tel'], input[type='text'], input[type='url'], textarea, select
+        background: #fff
+        padding: .5rem
+        height: 2.5rem
+        border-radius: 0
+        box-shadow: inset 0 0.1rem 0.1rem rgba(0, 0, 0, 0.2)
+        border: .1rem solid rgba(0, 0, 0, 0.15)
+    .label
+      padding-right: 1rem
+      text-align: right
+      flex: 0 0 30%
+      max-width: 30%
+      label
+        font-size: 1.4rem
+
+.licenses
+  font-size: 1.4rem
+  list-style: none
+  line-height: 1.2
+  & > li
+    margin-bottom: 2rem
+
+.header
+  border-top-left-radius: $border-radius
+  border-top-right-radius: $border-radius
+  border-bottom: .1rem solid $color-gray
+
+  .header-button
+    color: $color-gray !important
+    cursor: pointer
+
+.log
+  .day
+    font-weight: bold
+
+  table
+    margin: 0
+    tr
+      height: 4.7rem
+      overflow: hidden
+      &:last-child
+        td
+          border: 0 !important
+    td
+      white-space: nowrap
+      height: 4.7rem
+      padding-left: 1.5rem
+      padding-right: 1.5rem
+      overflow: hidden
+      text-overflow: ellipsis
+
+  th
+    color: $color-gray
+
+  td
+    vertical-align: top
+    &:not(:first-child)
+      padding: 0
+      
+button.clear
+  display: none      

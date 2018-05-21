@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="build/app.css">
+    <script type="text/javascript" src="render.js"></script>
+</head>
+<body>
+
+<main id="app" :class="platform">
+
+    <div class="triangle top">
+        <svg version="1.1"
+         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+         viewBox="0 0 40 20" style="enable-background:new 0 0 40 20;" xml:space="preserve">
+        <path class="triangle" d="M0.5,19.5c4,0,16-14.5,19-14.5s15,14.5,20,14.5S0.5,19.5,0.5,19.5"/>
+    </svg>
+    </div>
+
+    <div class="wrapper">
+        <div ref="main"></div>
+
+        <header class="panel header">
+        <span @click="listWindow"
+              href="#" title="List of time records" class="header-button">
+            <i class="fa fa-list"></i>
+        </span>
+            <span @click="contextMenu"
+                  href="#" class="float-right header-button" title="Settings">
+            <i class="fa fa-cog"></i>
+        </span>
+        </header>
+        <div class="content">
+            <content-track @load-projects="loadProjects"
+                           @load-resource="loadResource"
+                           @start="start"
+                           @stop="stop"
+                           @cancel="cancel"
+                           @update:project="v => project = v"
+                           @update:resource="v => resource = v"
+                           @update:resource-type="v => resourceType = v"
+                           :resource="resource"
+                           :project="project"
+                           :projects="projects"
+                           :issues="issues"
+                           :merge-requests="mergeRequests"
+                           :resource-type="resourceType"
+                           :starting="starting"
+                           :stopping="stopping"
+                           :cancelling="cancelling"
+                           :running="running"
+                           :loading-projects="loadingProjects"
+                           :loading-resource="loadingResource"></content-track>
+        </div>
+        <panel-footer :running="running"></panel-footer>
+    </div>
+
+    <div class="triangle bottom">
+        <svg version="1.1"
+         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+         viewBox="0 0 40 20" style="enable-background:new 0 0 40 20;" xml:space="preserve">
+        <path class="triangle" d="M0.5,19.5c4,0,16-14.5,19-14.5s15,14.5,20,14.5S0.5,19.5,0.5,19.5"/>
+    </svg>
+    </div>
+</main>
+
+<script type="text/javascript" src="build/app.js"></script>
+
+</body>
+</html>

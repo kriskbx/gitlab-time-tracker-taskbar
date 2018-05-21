@@ -1,0 +1,102 @@
+{
+  "name": "gtt-taskbar",
+  "productName": "gtt-taskbar",
+  "version": "0.2.0",
+  "description": "Gitlab Time Tracker Taskbar App",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "lint": "eslint src",
+    "dev": "NODE_ENV=development webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "NODE_ENV=development webpack --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "hot": "NODE_ENV=development webpack-dev-server --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "production": "NODE_ENV=production webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "keywords": [],
+  "author": "Kris Siepert",
+  "private": true,
+  "license": "GPL-2.0",
+  "config": {
+    "forge": {
+      "make_targets": {
+        "win32": [
+          "squirrel"
+        ],
+        "darwin": [
+          "zip"
+        ],
+        "linux": [
+          "deb",
+          "rpm"
+        ]
+      },
+      "electronPackagerConfig": {
+        "packageManager": "yarn",
+        "icon": "./resources/images/icon/icon.png"
+      },
+      "electronWinstallerConfig": {
+        "name": "gtt_taskbar",
+        "setupIcon": "./resources/images/icon/icon.ico"
+      },
+      "electronInstallerDebian": {
+        "icon": "./resources/images/icon/icon.png",
+        "categories": [
+          "Utility"
+        ],
+        "homepage": "https://github.com/kriskbx/gitlab-time-tracker-taskbar"
+      },
+      "electronInstallerRedhat": {
+        "license": "GPL-2.0",
+        "requires": [
+          "lsb",
+          "libappindictor"
+        ],
+        "compressionLevel": 9,
+        "categories": [
+          "Utility"
+        ]
+      },
+      "github_repository": {
+        "owner": "kriskbx",
+        "name": "gitlab-time-tracker-taskbar"
+      },
+      "windowsStoreConfig": {
+        "packageName": "",
+        "name": "gtttaskbar"
+      }
+    }
+  },
+  "dependencies": {
+    "babel-preset-es2016": "^6.24.1",
+    "chokidar": "^2.0.0",
+    "electron": "1.8.4",
+    "electron-compile": "^6.4.2",
+    "gitlab-time-tracker": "^1.7.6",
+    "moment": "^2.20.1",
+    "write-yaml": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "electron-forge": "^4.2.0",
+    "electron-prebuilt-compile": "1.7.11",
+    "eslint": "^3",
+    "eslint-config-airbnb": "^15",
+    "eslint-plugin-import": "^2",
+    "eslint-plugin-jsx-a11y": "^5",
+    "eslint-plugin-react": "^7",
+    "laravel-mix": "^2.0.0",
+    "milligram-stylus": "^1.3.0",
+    "roboto": "^0.8.2",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1",
+    "vue": "^2.5.13",
+    "vue-js-toggle-button": "^1.2.2",
+    "vue-resource": "^1.3.5",
+    "vue-select": "^2.4.0",
+    "vuejs-datetimepicker": "^1.1.3"
+  }
+}

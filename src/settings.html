@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Preferences</title>
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="build/app.css">
+    <script type="text/javascript" src="render.js"></script>
+</head>
+<body class="window">
+
+<div id="app">
+    <div class="container settings">
+        <form>
+            <fieldset>
+                <div class="fieldset" v-if="config">
+                    <div class="label">
+                        <label for="uri">GitLab API Uri</label>
+                    </div>
+                    <div class="input">
+                        <input id="uri" type="url" required v-model="config.data.url">
+                    </div>
+
+                    <div class="label">
+                        <label for="token">Personal Access Token</label>
+                    </div>
+                    <div class="input">
+                        <input id="token" type="password" required v-model="config.data.token">
+                        <small>You can create a personal access token in your <a href="#"
+                                                                                 @click.prevent="open('https://gitlab.com/profile/personal_access_tokens')"
+                                                                                 target="_blank">profile settings</a>.
+                        </small>
+                    </div>
+                    <div class="label">
+                    <label for="dateFormat">Date format</label>
+                </div>
+                    <div class="input">
+                        <input id="dateFormat" type="text" required v-model="config.data.dateFormat">
+                        <small>More about date formats <a href="#" @click.prevent="open('http://momentjs.com/docs/#/displaying/format/')">here</a>.</small>
+                    </div>
+                    <div class="label">
+                        <label for="timeFormat">Time format</label>
+                    </div>
+                    <div class="input">
+                        <input id="timeFormat" type="text" required v-model="config.data.timeFormat">
+                        <small>More about time formats <a href="#" @click.prevent="open('https://github.com/kriskbx/gitlab-time-tracker#time-format')">here</a>.</small>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript" src="build/app.js"></script>
+
+</body>
+</html>
