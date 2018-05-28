@@ -2,4 +2,4 @@
 
 >  An open source crossplatform menubar/taskbar application for GitLabs time tracking feature based on the [gtt command line interface](https://github.com/kriskbx/gitlab-time-tracker).
 
-This is beta version, feedback and contributions are appreciated.
+This is a beta version, feedback and contributions are appreciated.
