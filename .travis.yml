@@ -53,4 +53,4 @@ before_script:
   - sleep 3
 
 script:
-  - yarn run make
+  - yarn run publish

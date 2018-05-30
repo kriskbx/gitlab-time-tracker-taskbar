@@ -8,6 +8,7 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
+    "publish": "electron-forge publish",
     "lint": "eslint src",
     "dev": "NODE_ENV=development webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch": "NODE_ENV=development webpack --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
@@ -20,6 +21,17 @@
   "license": "GPL-2.0",
   "config": {
     "forge": {
+      "publish_targets": {
+        "win32": [
+          "github"
+        ],
+        "darwin": [
+          "github"
+        ],
+        "linux": [
+          "github"
+        ]
+      },
       "make_targets": {
         "win32": [
           "squirrel"
