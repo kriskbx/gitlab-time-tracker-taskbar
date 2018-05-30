@@ -29,6 +29,16 @@ addons:
       - xz-utils
       - xorriso
       - xvfb
+      - devscripts
+      - fakeroot
+      - debhelper
+      - automake
+      - autotools-dev
+      - pkg-config
+      - git
+      - ca-certificates
+      - rpm
+      - zip
 
 install:
   - nvm install 8.4
