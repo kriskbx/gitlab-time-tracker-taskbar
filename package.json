@@ -33,6 +33,12 @@
         ]
       },
       "electronPackagerConfig": {
+        "ignore": [
+          ".idea",
+          "resources",
+          "out",
+          ".tresorit"
+        ],
         "packageManager": "yarn",
         "icon": "./resources/images/icon/icon.png"
       },
