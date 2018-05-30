@@ -2,6 +2,8 @@ os: unstable
 cache:
   - node_modules
 environment:
+  GITHUB_TOKEN:
+    secure: G/hTb/AdUY4ynt5XGj10fROfQZC2xgogiQAiqXT63cEMGAGcZ8+6rOdQJzf4/PHf
   matrix:
     - nodejs_version: 8.4
 install:
