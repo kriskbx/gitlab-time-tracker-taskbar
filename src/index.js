@@ -11,6 +11,7 @@ const os = require('os');
 
 const moment = require('moment');
 var log = require('electron-log');
+log.transports.file.appName = 'gtt-taskbar';
 
 let gtt = new events.EventEmitter(),
     trayIcon = null,
