@@ -52,5 +52,7 @@ before_script:
   - sh -e /etc/init.d/xvfb start &
   - sleep 3
 
+if: tag IS present
+
 script:
   - yarn run publish
