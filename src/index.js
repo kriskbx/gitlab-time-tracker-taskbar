@@ -22,7 +22,7 @@ let gtt = new events.EventEmitter(),
     debug = false;
 
 gtt._app = app;
-gtt._version = '0.2.0 beta';
+gtt._version = '0.2.1';
 gtt._config = new Config(__dirname);
 gtt._api = new Base(gtt._config);
 gtt._tasks = new Tasks(gtt._config);
