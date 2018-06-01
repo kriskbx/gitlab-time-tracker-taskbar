@@ -3275,6 +3275,10 @@ electron-installer-redhat@^0.5.0:
     word-wrap "^1.2.1"
     yargs "7.0.2"
 
+electron-log@^2.2.14:
+  version "2.2.14"
+  resolved "https://registry.yarnpkg.com/electron-log/-/electron-log-2.2.14.tgz#2123319ccb8d70b0db07f0eda57d5823cb42b4b0"
+
 electron-osx-sign@^0.4.1:
   version "0.4.10"
   resolved "https://registry.yarnpkg.com/electron-osx-sign/-/electron-osx-sign-0.4.10.tgz#be4f3b89b2a75a1dc5f1e7249081ab2929ca3a26"
@@ -4617,9 +4621,9 @@ github-api-emojis@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/github-api-emojis/-/github-api-emojis-1.0.2.tgz#c3664164b915fc65c047c416d5d4a73a637e45a9"
 
-gitlab-time-tracker@^1.7.6:
-  version "1.7.6"
-  resolved "https://registry.yarnpkg.com/gitlab-time-tracker/-/gitlab-time-tracker-1.7.6.tgz#2bc728e4f93b37755aac0432576f1c853ed5443a"
+gitlab-time-tracker@^1.7.7:
+  version "1.7.7"
+  resolved "https://registry.yarnpkg.com/gitlab-time-tracker/-/gitlab-time-tracker-1.7.7.tgz#a2b380d78261e4a4adfc94b995ebf0ebc2eab229"
   dependencies:
     async "^2.4.0"
     camelcase "^4.1.0"

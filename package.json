@@ -91,7 +91,8 @@
     "chokidar": "^2.0.0",
     "electron": "1.8.4",
     "electron-compile": "^6.4.2",
-    "gitlab-time-tracker": "^1.7.6",
+    "electron-log": "^2.2.14",
+    "gitlab-time-tracker": "^1.7.7",
     "moment": "^2.20.1",
     "write-yaml": "^1.0.0"
   },

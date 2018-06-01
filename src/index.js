@@ -10,6 +10,7 @@ const chokidar = require('chokidar');
 const os = require('os');
 
 const moment = require('moment');
+var log = require('electron-log');
 
 let gtt = new events.EventEmitter(),
     trayIcon = null,
@@ -204,7 +205,10 @@ gtt.setTray = () => {
 
     if (gtt._platform == 'linux') {
         let contextMenu = Menu.buildFromTemplate([
-            {label: 'Open GTT', click: gtt.toggleTrayWindow},
+            {label: 'Open GTT', click: (d1, d2, d3) => {
+                console.log(d1,d2,d3);
+                gtt.toggleTrayWindow
+        }},
             {label: 'Quit', click: app.quit}
         ]);
         trayIcon.setContextMenu(contextMenu);
@@ -381,7 +385,7 @@ gtt.cache = {
  * @private
  */
 gtt._dump = (msg) => {
-    if (debug) console.log(`${moment().format('YYYY-MM-DD HH:mm:ss.SSS')} GTT ${msg}`)
+    log.info(msg);
 };
 
 gtt._send = (key, val) => {
@@ -430,12 +434,12 @@ gtt._handleError = error => {
     if (error.statusCode === 401 && !gtt._unauthorized) {
         gtt._unauthorized = true;
         if (dialog.showMessageBox(null, {
-                type: "warning",
-                title: "Unauthorized",
-                message: "Cannot connect to GitLab: unauthorized.",
-                detail: "If this is the first time you start gtt, open the preferences and add your GitLab API token.",
-                buttons: ["Go to preferences now", "I'll do it later"]
-            }) === 0) gtt.openSettingsWindow();
+            type: "warning",
+            title: "Unauthorized",
+            message: "Cannot connect to GitLab: unauthorized.",
+            detail: "If this is the first time you start gtt, open the preferences and add your GitLab API token.",
+            buttons: ["Go to preferences now", "I'll do it later"]
+        }) === 0) gtt.openSettingsWindow();
     }
 };
 
