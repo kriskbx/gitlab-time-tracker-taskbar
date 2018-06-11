@@ -158,6 +158,15 @@
         mounted() {
             this.selectedProject = this.project;
             this.selectedResource = this.resource;
+
+            this.$parent.$on('loaded-issues', () => {
+                this._setResourceOptions();
+                this._resetInput();
+            });
+            this.$parent.$on('loaded-mergeRequests', () => {
+                this._setResourceOptions();
+                this._resetInput();
+            });
         },
 
         components: {
@@ -191,18 +200,21 @@
             },
 
             _resetInput() {
-                if (!this.selectedResource) return;
+                if (!this.selectedResource || !this.resourceOptions) return;
 
                 if (this.resourceOptions.find(resource => {
-                        return resource.id === this.selectedResource.id
-                            && resource.type === this.selectedResource.type
-                            && resource.project === this.selectedResource.project;
-                    })) return;
+                    return resource.id === this.selectedResource.id
+                        && resource.type === this.selectedResource.type
+                        && resource.project === this.selectedResource.project;
+                })) return;
 
                 this.selectedResource = null;
             },
 
             _setProjectOptions() {
+                if(!this.projects)
+                    this.projects = [];
+
                 let arr = this.projects.map(project => ({
                     label: project.path_with_namespace,
                     last_activity: project.last_activity_at
@@ -219,7 +231,7 @@
                 let arr;
 
                 if (this.resourceType) {
-                    arr = this.issues[this.project.label]
+                    arr = this.issues[this.project.label];
                 } else {
                     arr = this.mergeRequests[this.project.label];
                 }

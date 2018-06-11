@@ -82,11 +82,17 @@ const app = new Vue({
             this.loadingProjects = false;
         });
         ipc.on('gtt-issues', (event, data) => {
-            this.issues[data.project] = data.issues;
+            if(data.project) {
+                this.issues[data.project] = data.issues;
+                this.$emit('loaded-issues');
+            }
             this.loadingResource = false;
         });
         ipc.on('gtt-merge-requests', (event, data) => {
-            this.mergeRequests[data.project] = data.mergeRequests;
+            if(data.project) {
+                this.mergeRequests[data.project] = data.mergeRequests;
+                this.$emit('loaded-mergeRequests');
+            }
             this.loadingResource = false;
         });
 

@@ -360,7 +360,9 @@ gtt.log = () => {
  */
 gtt.loadConfig = () => {
     gtt._dump(`Loaded config`);
-    return gtt._config = new Config(__dirname);
+    gtt._config = new Config(__dirname);
+    gtt._api = new Base(gtt._config);
+    return gtt._config;
 };
 
 /**
@@ -372,6 +374,7 @@ gtt.writeConfig = (config) => {
     gtt._watchers.config.remove();
     gtt._config.write(config, {url: null, token: null, dateFormat: null, timeFormat: null});
     gtt._watchers.config.add();
+    gtt.loadConfig();
 };
 
 /**
@@ -393,7 +396,7 @@ gtt._dump = (msg) => {
 };
 
 gtt._send = (key, val) => {
-    if(debug) {
+    if (debug) {
         gtt._dump(`ipc main send: ${key}, ${val}`);
     }
     trayWindow.webContents.send(key, val);
@@ -423,9 +426,9 @@ gtt._watchers.frames = {
         this.watcher = chokidar
             .watch(path.join(gtt._config.frameDir, '*.json'), {ignoreInitial: true})
             .on('raw', (event, path) => {
-                gtt._dump(`"${path}" changed.`);
                 if (this.timeout) clearTimeout(this.timeout);
                 this.timeout = setTimeout(() => {
+                    gtt._dump(`"${path}" changed.`);
                     gtt.log().then(data => gtt._send('gtt-log', data));
                     gtt.status().then(status => gtt._send('gtt-status', status));
                 }, 100);

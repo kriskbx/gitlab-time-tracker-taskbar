@@ -4621,9 +4621,9 @@ github-api-emojis@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/github-api-emojis/-/github-api-emojis-1.0.2.tgz#c3664164b915fc65c047c416d5d4a73a637e45a9"
 
-gitlab-time-tracker@^1.7.7:
-  version "1.7.7"
-  resolved "https://registry.yarnpkg.com/gitlab-time-tracker/-/gitlab-time-tracker-1.7.7.tgz#a2b380d78261e4a4adfc94b995ebf0ebc2eab229"
+gitlab-time-tracker@^1.7.9:
+  version "1.7.9"
+  resolved "https://registry.yarnpkg.com/gitlab-time-tracker/-/gitlab-time-tracker-1.7.9.tgz#438961ecf05ecc63b8dda8bfacd4a59819a7ffce"
   dependencies:
     async "^2.4.0"
     camelcase "^4.1.0"
