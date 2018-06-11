@@ -25,6 +25,12 @@ let gtt = new events.EventEmitter(),
 gtt._app = app;
 gtt._version = '0.2.1';
 gtt._config = new Config(__dirname);
+
+if (gtt._config.get('error-reporting')) {
+    var Raven = require('raven');
+    Raven.config('https://62cb30e3c06945b7960d624de45ed322@sentry.io/1218774').install();
+}
+
 gtt._api = new Base(gtt._config);
 gtt._tasks = new Tasks(gtt._config);
 gtt._paused = false;
@@ -206,10 +212,7 @@ gtt.setTray = () => {
 
     if (gtt._platform == 'linux') {
         let contextMenu = Menu.buildFromTemplate([
-            {label: 'Open GTT', click: (d1, d2, d3) => {
-                console.log(d1,d2,d3);
-                gtt.toggleTrayWindow
-        }},
+            {label: 'Open GTT', click: gtt.toggleTrayWindow},
             {label: 'Quit', click: app.quit}
         ]);
         trayIcon.setContextMenu(contextMenu);
@@ -390,6 +393,9 @@ gtt._dump = (msg) => {
 };
 
 gtt._send = (key, val) => {
+    if(debug) {
+        gtt._dump(`ipc main send: ${key}, ${val}`);
+    }
     trayWindow.webContents.send(key, val);
 };
 
@@ -416,11 +422,12 @@ gtt._watchers.frames = {
         gtt._dump('Added frames watcher');
         this.watcher = chokidar
             .watch(path.join(gtt._config.frameDir, '*.json'), {ignoreInitial: true})
-            .on('all', () => {
+            .on('raw', (event, path) => {
+                gtt._dump(`"${path}" changed.`);
                 if (this.timeout) clearTimeout(this.timeout);
                 this.timeout = setTimeout(() => {
                     gtt.log().then(data => gtt._send('gtt-log', data));
-                    gtt.status().then(status => gtt._send('gtt-status', status))
+                    gtt.status().then(status => gtt._send('gtt-status', status));
                 }, 100);
             });
     },

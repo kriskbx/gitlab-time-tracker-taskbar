@@ -589,6 +589,8 @@ html {
 #app div.triangle.bottom {
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
+  -webkit-filter: drop-shadow(0 -3px 2px rgba(0,0,0,0.5));
+          filter: drop-shadow(0 -3px 2px rgba(0,0,0,0.5));
 }
 #app.mac > .triangle.top,
 #app.linux > .triangle.top {

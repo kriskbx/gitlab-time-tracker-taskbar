@@ -94,6 +94,7 @@
     "electron-log": "^2.2.14",
     "gitlab-time-tracker": "^1.7.7",
     "moment": "^2.20.1",
+    "raven": "^2.6.2",
     "write-yaml": "^1.0.0"
   },
   "devDependencies": {
