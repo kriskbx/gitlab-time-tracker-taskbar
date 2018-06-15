@@ -399,7 +399,9 @@ gtt._send = (key, val) => {
     if (debug) {
         gtt._dump(`ipc main send: ${key}, ${val}`);
     }
-    trayWindow.webContents.send(key, val);
+
+    if(trayWindow)
+        trayWindow.webContents.send(key, val);
 };
 
 gtt._watchers.config = {
