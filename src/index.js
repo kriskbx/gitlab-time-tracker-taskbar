@@ -23,7 +23,7 @@ let gtt = new events.EventEmitter(),
     debug = false;
 
 gtt._app = app;
-gtt._version = '0.2.1';
+gtt._version = '0.2.4';
 gtt._config = new Config(__dirname);
 
 if (gtt._config.get('error-reporting')) {
