@@ -48,6 +48,17 @@ app.on('window-all-closed', () => {
 // Fix transparency issues on Linux
 app.disableHardwareAcceleration();
 
+// Single instance
+if(app.makeSingleInstance(() => {
+    if (trayWindow) {
+        trayWindow.show();
+        trayWindow.focus();
+    }
+})) {
+    app.quit();
+    process.exit();
+}
+
 app.on('ready', () => {
     setTimeout(() => {
         gtt._dump('Running on ' + gtt._platform);
@@ -563,7 +574,10 @@ process.on('uncaughtException', function (e) {
         Raven.config('https://62cb30e3c06945b7960d624de45ed322@sentry.io/1218774').install();
         Raven.captureException(e);
         console.log("done.");
-        setTimeout(process.exit, 5000);
+        setTimeout(() => {
+            app.quit();
+            process.exit();
+        }, 5000);
         return;
     }
 
