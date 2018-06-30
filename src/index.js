@@ -10,7 +10,8 @@ const chokidar = require('chokidar');
 const os = require('os');
 
 const moment = require('moment');
-var log = require('electron-log');
+const log = require('electron-log');
+
 log.transports.file.appName = 'gtt-taskbar';
 
 let gtt = new events.EventEmitter(),
@@ -26,11 +27,6 @@ gtt._app = app;
 gtt._version = '0.2.4';
 gtt._config = new Config(__dirname);
 
-if (gtt._config.get('error-reporting')) {
-    var Raven = require('raven');
-    Raven.config('https://62cb30e3c06945b7960d624de45ed322@sentry.io/1218774').install();
-}
-
 gtt._api = new Base(gtt._config);
 gtt._tasks = new Tasks(gtt._config);
 gtt._paused = false;
@@ -42,12 +38,14 @@ gtt._offline = false;
 gtt._platform = {darwin: 'mac', linux: 'linux', win32: 'win'}[os.platform()];
 gtt._iconPath = path.join(__dirname, 'images/', gtt._platform == 'mac' ? 'mac' : 'default');
 
+// Fix app not closing on Mac
 app.on('window-all-closed', () => {
     if (process.platform != 'darwin') {
         app.quit();
     }
 });
 
+// Fix transparency issues on Linux
 app.disableHardwareAcceleration();
 
 app.on('ready', () => {
@@ -400,7 +398,7 @@ gtt._send = (key, val) => {
         gtt._dump(`ipc main send: ${key}, ${val}`);
     }
 
-    if(trayWindow)
+    if (trayWindow)
         trayWindow.webContents.send(key, val);
 };
 
@@ -550,4 +548,24 @@ ipcMain.on('cache-get', (event, key) => {
 });
 ipcMain.on('cache-set', (event, {key, data}) => {
     gtt.cache.set(key, data);
+});
+
+process.on('uncaughtException', function (e) {
+    if (dialog.showMessageBox(null, {
+        type: "error",
+        title: "Error",
+        message: "gtt encountered an error and was terminated!",
+        detail: "You can send an error report containing the exception message and a stack trace to help improve gtt. No personal information will be transfered.",
+        buttons: ["Send error report", "Don't send report"]
+    }) === 0 || gtt._config.get('error-reporting')) {
+        console.log("Sending error report ...");
+        var Raven = require('raven');
+        Raven.config('https://62cb30e3c06945b7960d624de45ed322@sentry.io/1218774').install();
+        Raven.captureException(e);
+        console.log("done.");
+        setTimeout(process.exit, 5000);
+        return;
+    }
+
+    throw e;
 });
