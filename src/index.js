@@ -1,3 +1,5 @@
+if (require('electron-squirrel-startup')) return;
+
 const Config = require('./writable-file-config');
 const Tasks = require('gitlab-time-tracker/src/include/tasks');
 const Base = require('gitlab-time-tracker/src/models/base');

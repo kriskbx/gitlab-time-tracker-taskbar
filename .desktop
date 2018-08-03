@@ -1,9 +1,9 @@
 [Desktop Entry]
-Name=gtt
-GenericName=gitlab time tracker
+Name=gtt taskbar
+GenericName=gitlab time tracker taskbar
 Comment=A menubar application for GitLabs time tracking feature
 Categories=Utility;
-Exec=com.github.kriskbx.gitlab-time-tracker
+Exec=com.github.kriskbx.gitlab-time-tracker-taskbar
 Icon=application-default-icon
 Terminal=false
 Type=Application
