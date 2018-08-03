@@ -262,7 +262,9 @@ gtt.toggleTrayWindow = bounds => {
         return trayWindow.hide();
     }
 
+    trayWindow.setVisibleOnAllWorkspaces(true);
     trayWindow.show();
+    trayWindow.setVisibleOnAllWorkspaces(false);
 };
 
 /**
