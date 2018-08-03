@@ -4573,9 +4573,9 @@ gifsicle@^3.0.0:
     bin-wrapper "^3.0.0"
     logalot "^2.0.0"
 
-gitlab-time-tracker@^1.7.18:
-  version "1.7.18"
-  resolved "https://registry.yarnpkg.com/gitlab-time-tracker/-/gitlab-time-tracker-1.7.18.tgz#f1b55d8a19eea75a2f8dd17008752678d4ce983f"
+gitlab-time-tracker@^1.7.19:
+  version "1.7.19"
+  resolved "https://registry.yarnpkg.com/gitlab-time-tracker/-/gitlab-time-tracker-1.7.19.tgz#d621b203b47e8790f0dde28a4e67d1e941f8bde8"
   dependencies:
     async "^2.6.1"
     camelcase "^4.1.0"
