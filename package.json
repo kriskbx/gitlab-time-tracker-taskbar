@@ -1,7 +1,7 @@
 {
   "name": "gtt-taskbar",
   "productName": "gtt-taskbar",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Gitlab Time Tracker Taskbar App",
   "main": "src/index.js",
   "scripts": {

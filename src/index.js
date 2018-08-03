@@ -24,7 +24,7 @@ let gtt = new events.EventEmitter(),
     debug = false;
 
 gtt._app = app;
-gtt._version = '0.2.4';
+gtt._version = '0.2.5';
 gtt._config = new Config(__dirname);
 
 gtt._api = new Base(gtt._config);
