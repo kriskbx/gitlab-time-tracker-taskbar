@@ -1,8 +1,10 @@
 const Config = require('gitlab-time-tracker/src/include/config');
+const Frame = require('gitlab-time-tracker/src/models/baseFrame');
 
 window.Vue = require('vue');
 window.Vue.use(require('vue-resource'));
 const moment = require('moment');
+const _ = require('underscore');
 import ToggleButton from 'vue-js-toggle-button';
 import datetime from 'vuejs-datetimepicker';
 
@@ -68,10 +70,11 @@ const app = new Vue({
         ipc.on('gtt-config', (event, config) => this.setConfig(config));
         ipc.on('gtt-log', (event, data) => {
             this.loadingLog = false;
+            data.frames = _.map(data.frames, frames => _.map(frames, frame => Frame.copy(frame)));
             this.log = data;
         });
         ipc.on('gtt-status', (event, status) => {
-            this.running = status;
+            this.running = status ? status.map(frame => Frame.copy(frame)) : false;
             this.loadingStatus = false;
             this.starting = false;
             this.stopping = false;
@@ -82,14 +85,14 @@ const app = new Vue({
             this.loadingProjects = false;
         });
         ipc.on('gtt-issues', (event, data) => {
-            if(data.project) {
+            if (data.project) {
                 this.issues[data.project] = data.issues;
                 this.$emit('loaded-issues');
             }
             this.loadingResource = false;
         });
         ipc.on('gtt-merge-requests', (event, data) => {
-            if(data.project) {
+            if (data.project) {
                 this.mergeRequests[data.project] = data.mergeRequests;
                 this.$emit('loaded-mergeRequests');
             }

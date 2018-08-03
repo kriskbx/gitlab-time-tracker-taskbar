@@ -92,7 +92,7 @@
     "electron": "1.8.4",
     "electron-compile": "^6.4.2",
     "electron-log": "^2.2.14",
-    "gitlab-time-tracker": "^1.7.9",
+    "gitlab-time-tracker": "^1.7.18",
     "moment": "^2.20.1",
     "raven": "^2.6.2",
     "write-yaml": "^1.0.0"
