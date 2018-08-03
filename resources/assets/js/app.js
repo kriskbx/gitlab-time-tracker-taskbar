@@ -11,6 +11,10 @@ window.Vue.use(ToggleButton);
 const shell = window.state.shell;
 const ipc = window.state.ipc;
 
+function transformFrame(frame) {
+    return Object.assign({}, frame, { start: frame._start, stop: frame._stop });
+}
+
 const app = new Vue({
     el: '#app',
     data: window.state.data,
@@ -54,7 +58,7 @@ const app = new Vue({
         },
         frames() {
             let frames = {};
-            this.days.forEach(day => frames[day] = this.log.frames[day].sort((a, b) => a.start >= b.start ? 1 : -1));
+            this.days.forEach(day => frames[day] = this.log.frames[day].map(transformFrame).sort((a, b) => a.start >= b.start ? 1 : -1));
             return frames;
         }
     },
@@ -71,7 +75,7 @@ const app = new Vue({
             this.log = data;
         });
         ipc.on('gtt-status', (event, status) => {
-            this.running = status;
+            this.running = status.map(transformFrame);
             this.loadingStatus = false;
             this.starting = false;
             this.stopping = false;
