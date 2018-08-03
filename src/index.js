@@ -17,6 +17,7 @@ log.transports.file.appName = 'gtt-taskbar';
 let gtt = new events.EventEmitter(),
     trayIcon = null,
     trayWindow = null,
+    trayPos = null,
     contextMenu = null,
     settingsWindow = null,
     aboutWindow = null,
@@ -49,7 +50,7 @@ app.on('window-all-closed', () => {
 app.disableHardwareAcceleration();
 
 // Single instance
-if(app.makeSingleInstance(() => {
+if (app.makeSingleInstance(() => {
     if (trayWindow) {
         trayWindow.show();
         trayWindow.focus();
@@ -221,9 +222,12 @@ gtt.setTray = () => {
 
     if (gtt._platform == 'linux') {
         let contextMenu = Menu.buildFromTemplate([
-            {label: 'Open GTT', click: gtt.toggleTrayWindow},
+            {
+                label: 'Open GTT', click: gtt.toggleTrayWindow
+            },
             {label: 'Quit', click: app.quit}
         ]);
+
         trayIcon.setContextMenu(contextMenu);
     } else {
 
@@ -248,8 +252,7 @@ gtt.toggleTrayWindow = bounds => {
             y = bounds.y - 250;
         }
     } else {
-        let {width} = electron.screen.getPrimaryDisplay().workAreaSize;
-        x = (width / 2) - (trayWindowBounds.width / 2);
+        x = electron.screen.getCursorScreenPoint().x - (trayWindowBounds.width / 2);
         y = 30;
     }
 

@@ -40,6 +40,7 @@
           "zip"
         ],
         "linux": [
+          "snap",
           "deb",
           "rpm"
         ]
@@ -89,7 +90,7 @@
   "dependencies": {
     "babel-preset-es2016": "^6.24.1",
     "chokidar": "^2.0.0",
-    "electron": "1.8.4",
+    "electron": "2.0.2",
     "electron-compile": "^6.4.2",
     "electron-log": "^2.2.14",
     "gitlab-time-tracker": "^1.7.19",
@@ -101,7 +102,7 @@
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
-    "electron-forge": "^4.2.0",
+    "electron-forge": "^5.0.0",
     "electron-prebuilt-compile": "1.7.11",
     "eslint": "^3",
     "eslint-config-airbnb": "^15",
