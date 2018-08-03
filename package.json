@@ -61,7 +61,7 @@
         "desktopTemplate": "./.desktop"
       },
       "electronWinstallerConfig": {
-        "name": "gtt_taskbar",
+        "name": "gtt-taskbar",
         "setupIcon": "./resources/images/icon/icon.ico"
       },
       "electronInstallerDebian": {
@@ -87,8 +87,8 @@
         "name": "gitlab-time-tracker-taskbar"
       },
       "windowsStoreConfig": {
-        "packageName": "",
-        "name": "gtttaskbar"
+        "packageName": "gtt-taskbar",
+        "name": "gitlab time tracker taskbar"
       }
     }
   },
