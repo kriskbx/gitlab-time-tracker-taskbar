@@ -1,5 +1,6 @@
 sudo: required
 dist: trusty
+if: tag IS present
 
 language: c
 
