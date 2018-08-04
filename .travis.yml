@@ -39,7 +39,7 @@ addons:
       - ca-certificates
       - rpm
       - zip
-      - snapcraft
+      - snapd
 
 install:
   - nvm install 8.4
