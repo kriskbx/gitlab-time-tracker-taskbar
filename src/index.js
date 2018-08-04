@@ -13,6 +13,7 @@ const os = require('os');
 
 const moment = require('moment');
 const log = require('electron-log');
+const pjson = require('./package.json');
 
 log.transports.file.appName = 'gtt-taskbar';
 
@@ -27,7 +28,7 @@ let gtt = new events.EventEmitter(),
     debug = false;
 
 gtt._app = app;
-gtt._version = '0.2.6';
+gtt._version = pjson.version;
 gtt._config = new Config(__dirname);
 
 gtt._api = new Base(gtt._config);
