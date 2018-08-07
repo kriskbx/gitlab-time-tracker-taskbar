@@ -19,5 +19,8 @@ build: off
 version: '{build}'
 shallow_clone: true
 clone_depth: 1
-test_script:
-- yarn run publish
+deploy:
+- provider: Environment
+  name: production
+  on:
+    APPVEYOR_REPO_TAG: true
