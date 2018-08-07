@@ -29,7 +29,8 @@
           "github"
         ],
         "linux": [
-          "github"
+          "github",
+          "snapStore"
         ]
       },
       "make_targets": {
@@ -81,6 +82,9 @@
         "categories": [
           "Utility"
         ]
+      },
+      "snapStore":{
+        "release": "candidate,beta"
       },
       "github_repository": {
         "owner": "kriskbx",
