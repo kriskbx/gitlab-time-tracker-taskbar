@@ -47,7 +47,6 @@ install:
   - nvm install 8.4
   - npm install -g yarn
   - yarn install
-  - sudo snap install docker
   - export DISPLAY=':99.0'
   - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
 
@@ -57,6 +56,8 @@ before_script:
   - sleep 3
 
 script:
-  - bash -c "snapcraft() { echo 'test lol'; }"
+  - sudo snap install docker
+  - alias snapcraft="sudo ./snap.sh"
+  - snapcraft --version
   #- if [ -n "$TRAVIS_TAG" ]; then ; fi
   #- sudo bash -c "snapcraft() { docker run -v $(pwd):/my-snap snapcore/snapcraft sh -c 'apt update && cd /my-snap && snapcraft $1'; } && yarn run publish"
