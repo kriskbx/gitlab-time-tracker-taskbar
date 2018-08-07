@@ -56,7 +56,7 @@ before_script:
 
 script:
   - shopt -s expand_aliases
-  - alias snapcraft="sudo ./snap.sh"
+  - alias snapcraft="sudo sh snap.sh"
   - snapcraft --version
   #- if [ -n "$TRAVIS_TAG" ]; then ; fi
   #- sudo bash -c "snapcraft() { docker run -v $(pwd):/my-snap snapcore/snapcraft sh -c 'apt update && cd /my-snap && snapcraft $1'; } && yarn run publish"
