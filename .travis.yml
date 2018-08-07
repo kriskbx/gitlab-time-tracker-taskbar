@@ -46,12 +46,14 @@ install:
   - nvm install 8.4
   - npm install -g yarn
   - yarn install
+  - snap install docker
   - export DISPLAY=':99.0'
   - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
 
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start &
+  - snapcraft() { docker run -v $(pwd):/my-snap snapcore/snapcraft sh -c "apt update && cd /my-snap && snapcraft $1" }
   - sleep 3
 
 script:

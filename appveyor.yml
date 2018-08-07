@@ -19,8 +19,5 @@ build: off
 version: '{build}'
 shallow_clone: true
 clone_depth: 1
-deploy:
-- provider: Environment
-  name: production
-  on:
-    APPVEYOR_REPO_TAG: true
+test_script:
+- ps: if($env:appveyor_repo_tag -eq 'True') { yarn run publish } else { echo "Not a tag build" }
