@@ -40,8 +40,7 @@ addons:
       - ca-certificates
       - rpm
       - zip
-      - snapd
-      - bash
+      - docker
 
 install:
   - nvm install 8.4
@@ -56,7 +55,7 @@ before_script:
   - sleep 3
 
 script:
-  - sudo snap install docker
+  - shopt -s expand_aliases
   - alias snapcraft="sudo ./snap.sh"
   - snapcraft --version
   #- if [ -n "$TRAVIS_TAG" ]; then ; fi
