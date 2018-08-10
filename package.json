@@ -41,7 +41,6 @@
           "zip"
         ],
         "linux": [
-          "snap",
           "deb",
           "rpm"
         ]
@@ -84,7 +83,7 @@
         ]
       },
       "snapStore":{
-        "release": "candidate,beta"
+        "release": "stable"
       },
       "github_repository": {
         "owner": "kriskbx",

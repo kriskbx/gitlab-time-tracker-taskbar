@@ -13,7 +13,7 @@ const os = require('os');
 
 const moment = require('moment');
 const log = require('electron-log');
-const pjson = require('./package.json');
+const pjson = require('../package.json');
 
 log.transports.file.appName = 'gtt-taskbar';
 
