@@ -29,7 +29,6 @@ install:
   - nvm install 8.4
   - npm install -g yarn
   - yarn install
-  - docker pull kriskbx/gtt-taskbar-builder
 
 before_script:
   - export DISPLAY=:99.0
@@ -38,8 +37,4 @@ before_script:
 
 script:
   - #if [ -n "$TRAVIS_TAG" ]; then ; fi
-  - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
-  - yarn run publish
-  - else
-  - docker run --rm -it -e "GITHUB_TOKEN=$GITHUB_TOKEN" -v $(pwd):/code kriskbx/gtt-taskbar-builder ./build.sh
-  - fi
+  - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then yarn run publish; else docker run --rm -it -e "GITHUB_TOKEN=$GITHUB_TOKEN" -v $(pwd):/code kriskbx/gtt-taskbar-builder ./build.sh; fi
