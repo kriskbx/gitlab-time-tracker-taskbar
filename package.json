@@ -29,8 +29,7 @@
           "github"
         ],
         "linux": [
-          "github",
-          "snapStore"
+          "github"
         ]
       },
       "make_targets": {
@@ -41,6 +40,7 @@
           "zip"
         ],
         "linux": [
+          "snap",
           "deb",
           "rpm"
         ]
@@ -56,7 +56,9 @@
         "icon": "./resources/images/icon/icon.png"
       },
       "electronInstallerSnap": {
-        "appPlugs": ["browser-support"],
+        "appPlugs": [
+          "browser-support"
+        ],
         "grade": "stable",
         "desktopTemplate": "./.desktop"
       },
@@ -82,7 +84,7 @@
           "Utility"
         ]
       },
-      "snapStore":{
+      "snapStore": {
         "release": "stable"
       },
       "github_repository": {
@@ -101,6 +103,7 @@
     "electron": "2.0.2",
     "electron-compile": "^6.4.2",
     "electron-log": "^2.2.14",
+    "electron-squirrel-startup": "^1.0.0",
     "gitlab-time-tracker": "^1.7.19",
     "moment": "^2.20.1",
     "raven": "^2.6.2",

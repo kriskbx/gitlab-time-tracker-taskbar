@@ -1,3 +1,10 @@
 #!/bin/bash
 
-sudo docker run -v $(pwd):/my-snap snapcore/snapcraft sh -c "apt update && cd /my-snap && snapcraft $@"
+Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+export DISPLAY=:99.0
+export DEBUG=electron-installer-snap:snapcraft
+sleep 5
+
+yarn install
+yarn run production --verbose
+yarn run publish --verbose
