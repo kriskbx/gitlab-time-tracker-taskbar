@@ -33,7 +33,7 @@ install:
 before_script:
   - export DISPLAY=:99.0
   - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
-  - sleep 5
+  - yarn run production
 
 script:
   - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then yarn run make; else docker run --rm -it -e "GITHUB_TOKEN=$GITHUB_TOKEN" -v $(pwd):/code kriskbx/gtt-taskbar-builder ./build.sh; fi

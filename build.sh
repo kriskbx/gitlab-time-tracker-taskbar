@@ -6,5 +6,5 @@ export DEBUG=electron-installer-snap:snapcraft
 sleep 5
 
 yarn install
-yarn run production --verbose
+yarn run production
 yarn run make
