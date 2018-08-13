@@ -425,7 +425,13 @@ gtt._watchers.config = {
     add() {
         gtt._dump('Added config watcher');
         this.watcher = chokidar
-            .watch(gtt._config.global)
+            .watch(gtt._config.global, {
+                ignoreInitial: true,
+                awaitWriteFinish: {
+                    stabilityThreshold: 2000,
+                    pollInterval: 100,
+                },
+            })
             .on('change', () => {
                 gtt.loadConfig();
                 gtt._unauthorized = false;
