@@ -7,4 +7,4 @@ sleep 5
 
 yarn install
 yarn run production --verbose
-yarn run publish --verbose
+yarn run make

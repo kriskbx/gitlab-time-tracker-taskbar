@@ -36,5 +36,7 @@ before_script:
   - sleep 5
 
 script:
-  - #if [ -n "$TRAVIS_TAG" ]; then ; fi
-  - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then yarn run publish; else docker run --rm -it -e "GITHUB_TOKEN=$GITHUB_TOKEN" -v $(pwd):/code kriskbx/gtt-taskbar-builder ./build.sh; fi
+  - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then yarn run make; else docker run --rm -it -e "GITHUB_TOKEN=$GITHUB_TOKEN" -v $(pwd):/code kriskbx/gtt-taskbar-builder ./build.sh; fi
+
+after_success:
+  - if [ -n "$TRAVIS_TAG" ]; then yarn run publish; fi
