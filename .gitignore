@@ -1,7 +1,7 @@
 node_modules
 out
 .idea
-Icon
+/Icon*
 yarn-error.log
 .tresorit
 **/.DS_Store
