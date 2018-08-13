@@ -7,4 +7,4 @@ sleep 5
 
 yarn install
 yarn run production
-yarn run make
+yarn run publish
