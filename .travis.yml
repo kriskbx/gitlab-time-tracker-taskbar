@@ -23,40 +23,11 @@ addons:
     sources:
       - ubuntu-toolchain-r-test
     packages:
-      - g++-4.8
-      - icnsutils
-      - graphicsmagick
-      - libgnome-keyring-dev
-      - xz-utils
-      - xorriso
-      - xvfb
-      - devscripts
-      - fakeroot
-      - debhelper
-      - automake
-      - autotools-dev
-      - pkg-config
-      - git
-      - ca-certificates
-      - rpm
-      - zip
       - docker
 
 install:
-  - nvm install 8.4
-  - npm install -g yarn
-  - yarn install
-  - export DISPLAY=':99.0'
-  - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
-
-before_script:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start &
-  - sleep 3
+  - docker pull kriskbx/gtt-taskbar-builder
 
 script:
-  - shopt -s expand_aliases
-  - alias snapcraft="sudo sh snap.sh"
-  - yarn run publish
-    #- if [ -n "$TRAVIS_TAG" ]; then ; fi
-  #- sudo bash -c "snapcraft() { docker run -v $(pwd):/my-snap snapcore/snapcraft sh -c 'apt update && cd /my-snap && snapcraft $1'; } && yarn run publish"
+  - #if [ -n "$TRAVIS_TAG" ]; then ; fi
+  - docker run --rm -it -e "GITHUB_TOKEN=$GITHUB_TOKEN" -v $(pwd):/code kriskbx/gtt-taskbar-builder ./build.sh
