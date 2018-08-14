@@ -391,7 +391,6 @@ gtt.writeConfig = (config) => {
     gtt._watchers.config.remove();
     gtt._config.write(config, {url: null, token: null, dateFormat: null, timeFormat: null});
     gtt._watchers.config.add();
-    gtt.loadConfig();
 };
 
 /**
@@ -428,7 +427,7 @@ gtt._watchers.config = {
             .watch(gtt._config.global, {
                 ignoreInitial: true,
                 awaitWriteFinish: {
-                    stabilityThreshold: 2000,
+                    stabilityThreshold: 500,
                     pollInterval: 100,
                 },
             })

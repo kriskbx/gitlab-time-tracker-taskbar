@@ -45,6 +45,7 @@ const app = new Vue({
         'config': {
             deep: true,
             handler: function () {
+                if(this.loadingConfig) return;
                 this.writeConfig(this.config)
             }
         }
@@ -123,7 +124,11 @@ const app = new Vue({
             return this.config.toHumanReadable(input);
         },
         setConfig(config) {
+            this.loadingConfig = true;
             this.config = Object.assign(new Config, config);
+            setTimeout(() => {
+                this.loadingConfig = false;
+            }, 100);
         },
         moment(input) {
             return moment(input);
