@@ -104,7 +104,7 @@
     "electron-compile": "^6.4.2",
     "electron-log": "^2.2.14",
     "electron-squirrel-startup": "^1.0.0",
-    "gitlab-time-tracker": "^1.7.19",
+    "gitlab-time-tracker": "^1.7.20",
     "moment": "^2.20.1",
     "raven": "^2.6.2",
     "write-yaml": "^1.0.0"
