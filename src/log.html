@@ -12,7 +12,7 @@
 <div id="app">
     <div ref="log"></div>
 
-    <div class="container" v-if="!loadingLog && log">
+    <div class="container" v-if="!loadingLog && log" v-cloak>
         <table class="log">
             <thead>
             <th>day</th>

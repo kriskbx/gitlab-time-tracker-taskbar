@@ -562,6 +562,9 @@ img {
 .float-right {
   float: right;
 }
+[v-cloak] {
+  display: none;
+}
 html {
   height: 100%;
   padding: 0;
