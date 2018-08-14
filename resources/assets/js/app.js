@@ -71,7 +71,11 @@ const app = new Vue({
         ipc.on('gtt-config', (event, config) => this.setConfig(config));
         ipc.on('gtt-log', (event, data) => {
             this.loadingLog = false;
-            data.frames = _.map(data.frames, frames => _.map(frames, frame => Frame.copy(frame)));
+            let i;
+            for(i in data.frames) {
+                if(!data.frames.hasOwnProperty(i)) continue;
+                data.frames[i] = _.map(data.frames[i], frame => Frame.copy(frame));
+            }
             this.log = data;
         });
         ipc.on('gtt-status', (event, status) => {

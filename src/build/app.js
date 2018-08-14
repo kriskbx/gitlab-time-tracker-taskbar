@@ -29930,11 +29930,13 @@ var app = new Vue({
         });
         ipc.on('gtt-log', function (event, data) {
             _this2.loadingLog = false;
-            data.frames = _.map(data.frames, function (frames) {
-                return _.map(frames, function (frame) {
+            var i = void 0;
+            for (i in data.frames) {
+                if (!data.frames.hasOwnProperty(i)) continue;
+                data.frames[i] = _.map(data.frames[i], function (frame) {
                     return Frame.copy(frame);
                 });
-            });
+            }
             _this2.log = data;
         });
         ipc.on('gtt-status', function (event, status) {
@@ -30863,6 +30865,7 @@ class baseFrame {
         frame._stop = json.stop;
         frame.notes = json.notes;
         frame.timezone = json.timezone;
+        frame.modified = json.modified;
         frame.validate();
 
         return frame;
@@ -30895,7 +30898,8 @@ class baseFrame {
             notes: frame.notes,
             start: frame._start,
             stop: frame._stop,
-            timezone: frame.timezone
+            timezone: frame.timezone,
+            modified: frame.modified
         });
     }
 
