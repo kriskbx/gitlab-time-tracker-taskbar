@@ -13,67 +13,37 @@
     <div ref="log"></div>
 
     <div class="container" v-if="!loadingLog && log" v-cloak>
-        <table class="log">
-            <thead>
-            <th>day</th>
-            <th>timeframe</th>
-            <th>duration</th>
-            <th>project</th>
-            <th>type</th>
-            <th>id</th>
-            </thead>
-            <tr v-for="day in days">
-                <td class="day">
-                    <p>{{ moment(day).format('MMMM Do YYYY') }}</p>
+        <div class="log">
+            <div class="day" v-for="day in days">
+                <div class="headline header">
+                    {{ moment(day).format('MMMM Do YYYY') }}
                     <small>{{ human(log.times[day]) }}</small>
-                </td>
-                <td>
-                    <table>
-                        <tr v-for="frame in frames[day]">
-                            <td>
-                                {{ moment(frame.start).format('HH:mm') }} - {{ moment(frame.stop).format('HH:mm') }}
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td>
-                    <table>
-                        <tr v-for="frame in frames[day]">
-                            <td>
-                                {{ human(parseInt(moment(frame.stop).diff(frame.start) / 1000)) }}
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td>
-                    <table>
-                        <tr v-for="frame in frames[day]">
-                            <td>
-                                {{ frame.project }}
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td>
-                    <table>
-                        <tr v-for="frame in frames[day]">
-                            <td>
-                                {{ frame.resource.type }}
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td>
-                    <table>
-                        <tr v-for="frame in frames[day]">
-                            <td>
-                                {{ frame.resource.id }}
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
+                </div>
+                <div class="list">
+                    <div class="entry" v-for="frame in frames[day]">
+                        <div class="cell timeframe">
+                            {{ moment(frame.start).format('HH:mm') }} &nbsp; - &nbsp; {{ moment(frame.stop).format('HH:mm') }}
+                        </div>
+                        <div class="cell">
+                            ( {{ human(parseInt(moment(frame.stop).diff(frame.start) / 1000)) }} )
+                        </div>
+                        <div class="cell">
+                            {{ frame.project }}
+                        </div>
+                        <div class="cell">
+                            {{ frame.resource.type }} #{{ frame.resource.id }}
+                        </div>
+                        <div class="cell">
+                            <span class="sync" v-if="frame.modified">
+                                <i title="Record is in sync with GitLab" class="fa fa-check-circle green" v-if="synced(frame.modified)"></i>
+                                <i title="Record not synced with Gitlab" class="fa fa-times-circle red" v-if="!synced(frame.modified)"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 

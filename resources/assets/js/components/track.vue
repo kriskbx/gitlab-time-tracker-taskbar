@@ -10,6 +10,7 @@
 
             <v-select class="project"
                       v-model="selectedProject"
+                      max-height="220px"
                       placeholder="Select Project"
                       :options="projectOptions"></v-select>
         </div>
@@ -31,6 +32,7 @@
 
             <v-select class="resource"
                       v-model="selectedResource"
+                      max-height="220px"
                       :placeholder="resourceType ? 'Select Issue' : 'Select MR'"
                       :options="resourceOptions"></v-select>
         </div>

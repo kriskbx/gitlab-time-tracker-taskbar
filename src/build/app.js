@@ -29925,6 +29925,9 @@ var app = new Vue({
         this.platform = ipc.sync('gtt-platform', 'get');
 
         // set ipc listeners
+        ipc.on('gtt-last-sync', function (event, lastSync) {
+            return _this2.lastSync = lastSync;
+        });
         ipc.on('gtt-config', function (event, config) {
             return _this2.setConfig(config);
         });
@@ -29989,6 +29992,10 @@ var app = new Vue({
 
 
     methods: {
+        synced: function synced(modified) {
+            if (!this.lastSync) return;
+            return _moment(modified).diff(this.lastSync) < 0;
+        },
         human: function human(input) {
             if (!this.config) return;
             return this.config.toHumanReadable(input);
@@ -30039,6 +30046,7 @@ var app = new Vue({
         loadLog: function loadLog() {
             this.loadingLog = true;
             ipc.send('gtt-log');
+            ipc.send('gtt-sync');
         },
         loadResource: function loadResource() {
             if (this.resourceType) {
@@ -37138,6 +37146,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -37378,7 +37388,11 @@ var render = function() {
         _vm._v(" "),
         _c("v-select", {
           staticClass: "project",
-          attrs: { placeholder: "Select Project", options: _vm.projectOptions },
+          attrs: {
+            "max-height": "220px",
+            placeholder: "Select Project",
+            options: _vm.projectOptions
+          },
           model: {
             value: _vm.selectedProject,
             callback: function($$v) {
@@ -37429,6 +37443,7 @@ var render = function() {
         _c("v-select", {
           staticClass: "resource",
           attrs: {
+            "max-height": "220px",
             placeholder: _vm.resourceType ? "Select Issue" : "Select MR",
             options: _vm.resourceOptions
           },

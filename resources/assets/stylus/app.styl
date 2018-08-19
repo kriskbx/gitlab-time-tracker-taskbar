@@ -6,6 +6,7 @@ $color-light-gray = #e6e6e6
 $color-middle-gray = #cbcbcb
 $color-mac-gray = #E7E7E7
 $color-bluish = #bfcbd9
+$color-blue = #1c79c3
 $color-black = #000
 $border-radius = .7rem
 
@@ -20,29 +21,37 @@ html
   padding: 0
 
 body
-  height: 25.4rem  
-  padding: 0 10px
   overflow: visible
+  padding: 0 10px
   border-bottom-left-radius: $border-radius
   border-bottom-right-radius: $border-radius
   background: transparent
 
-body, html  
+body, html
   border: 0
   margin: 0
 
-#app  
+#app
+  height: 25.4rem
+  overflow: visible
   position: relative
-  height: 100%  
+
   div.triangle
     display: none
     &.bottom
       transform: rotate(180deg)
-      filter: drop-shadow(0 -3px 2px rgba(0,0,0,0.5))
+      filter: drop-shadow(0 -3px 2px rgba(0, 0, 0, 0.5))
   &.mac, &.linux
     & > .triangle.top
       display: block
   &.win
+    position: absolute
+    bottom: 0
+    left: 10px
+    right: 10px
+    .v-select .dropdown-menu
+      top: auto
+      bottom: 100%
     & > .triangle.bottom
       display: block
 
@@ -52,7 +61,8 @@ body, html
   height: calc(100% - 3rem)
   overflow-y: visible
   overflow-x: hidden
-  box-shadow: 0 0 .2rem rgba(0,0,0,0.5)
+  box-shadow: 0 0 .2rem rgba(0, 0, 0, 0.5)
+  border-radius: $border-radius
 
 .settings
   line-height: 1.2
@@ -60,7 +70,7 @@ body, html
 .triangle
   text-align: center
   height: 1.5rem
-  filter: drop-shadow(0 0 2px rgba(0,0,0,0.5))
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5))
   &.bottom
     transform: rotate(180deg)
     display: none
@@ -271,32 +281,45 @@ body, html
     cursor: pointer
 
 .log
-  .day
-    font-weight: bold
 
-  table
-    margin: 0
-    tr
-      height: 4.7rem
-      overflow: hidden
-      &:last-child
-        td
-          border: 0 !important
-    td
-      white-space: nowrap
-      height: 4.7rem
-      padding-left: 1.5rem
-      padding-right: 1.5rem
-      overflow: hidden
-      text-overflow: ellipsis
+  .timeframe
+    color: $color-blue
 
-  th
-    color: $color-gray
+  .sync
+    font-size: 1.6rem
+    .red
+      color: $color-red
+    .green
+      color: green
 
-  td
-    vertical-align: top
-    &:not(:first-child)
-      padding: 0
-      
+  & > .day
+    overflow: hidden
+    box-shadow: 0 .05rem .3rem rgba(0, 0, 0, 0.4)
+    border-radius: .6rem
+    margin-bottom: 2rem
+    & > .headline
+      background: $color-light-gray
+      color: $color-gray
+      font-weight: bold
+      padding: 1rem
+      & > small
+        font-weight: normal
+        display: inline-block
+        float: right
+        margin-top: .3rem
+    & > .list
+      & > .entry
+        display: flex
+        flex-direction: row
+        width: 100%
+        border-bottom: 1px solid $color-light-gray
+        padding: .6rem 1rem
+        & > .cell
+          flex: 1
+        &:hover
+          background: lighten($color-light-gray, 40%)
+        &:last-child
+          border-bottom: 0
+
 button.clear
-  display: none      
+  display: none

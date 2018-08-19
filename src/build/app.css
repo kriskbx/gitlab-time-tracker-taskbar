@@ -570,9 +570,8 @@ html {
   padding: 0;
 }
 body {
-  height: 25.4rem;
-  padding: 0 10px;
   overflow: visible;
+  padding: 0 10px;
   border-bottom-left-radius: 0.7rem;
   border-bottom-right-radius: 0.7rem;
   background: transparent;
@@ -583,8 +582,9 @@ html {
   margin: 0;
 }
 #app {
+  height: 25.4rem;
+  overflow: visible;
   position: relative;
-  height: 100%;
 }
 #app div.triangle {
   display: none;
@@ -598,6 +598,16 @@ html {
 #app.mac > .triangle.top,
 #app.linux > .triangle.top {
   display: block;
+}
+#app.win {
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  right: 10px;
+}
+#app.win .v-select .dropdown-menu {
+  top: auto;
+  bottom: 100%;
 }
 #app.win > .triangle.bottom {
   display: block;
@@ -615,6 +625,7 @@ html {
   overflow-x: hidden;
   -webkit-box-shadow: 0 0 0.2rem rgba(0,0,0,0.5);
           box-shadow: 0 0 0.2rem rgba(0,0,0,0.5);
+  border-radius: 0.7rem;
 }
 .settings {
   line-height: 1.2;
@@ -894,35 +905,59 @@ html {
   color: #909090 !important;
   cursor: pointer;
 }
-.log .day {
-  font-weight: bold;
+.log .timeframe {
+  color: #1c79c3;
 }
-.log table {
-  margin: 0;
+.log .sync {
+  font-size: 1.6rem;
 }
-.log table tr {
-  height: 4.7rem;
+.log .sync .red {
+  color: #f8561e;
+}
+.log .sync .green {
+  color: #008000;
+}
+.log > .day {
   overflow: hidden;
+  -webkit-box-shadow: 0 0.05rem 0.3rem rgba(0,0,0,0.4);
+          box-shadow: 0 0.05rem 0.3rem rgba(0,0,0,0.4);
+  border-radius: 0.6rem;
+  margin-bottom: 2rem;
 }
-.log table tr:last-child td {
-  border: 0 !important;
-}
-.log table td {
-  white-space: nowrap;
-  height: 4.7rem;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.log th {
+.log > .day > .headline {
+  background: #e6e6e6;
   color: #909090;
+  font-weight: bold;
+  padding: 1rem;
 }
-.log td {
-  vertical-align: top;
+.log > .day > .headline > small {
+  font-weight: normal;
+  display: inline-block;
+  float: right;
+  margin-top: 0.3rem;
 }
-.log td:not(:first-child) {
-  padding: 0;
+.log > .day > .list > .entry {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 100%;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 0.6rem 1rem;
+}
+.log > .day > .list > .entry > .cell {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.log > .day > .list > .entry:hover {
+  background: #f0f0f0;
+}
+.log > .day > .list > .entry:last-child {
+  border-bottom: 0;
 }
 button.clear {
   display: none;

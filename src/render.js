@@ -19,7 +19,8 @@ window.state = {
         cancelling: false,
         version: false,
         log: null,
-        platform: null
+        platform: null,
+        lastSync: null
     },
     ipc: {
         sync(key, args) {

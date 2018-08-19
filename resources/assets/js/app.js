@@ -68,6 +68,7 @@ const app = new Vue({
         this.platform = ipc.sync('gtt-platform', 'get');
 
         // set ipc listeners
+        ipc.on('gtt-last-sync', (event, lastSync) => this.lastSync = lastSync);
         ipc.on('gtt-config', (event, config) => this.setConfig(config));
         ipc.on('gtt-log', (event, data) => {
             this.loadingLog = false;
@@ -123,6 +124,10 @@ const app = new Vue({
     },
 
     methods: {
+        synced(modified) {
+            if(!this.lastSync) return;
+            return moment(modified).diff(this.lastSync) < 0;
+        },
         human(input) {
             if (!this.config) return;
             return this.config.toHumanReadable(input);
@@ -171,6 +176,7 @@ const app = new Vue({
         loadLog() {
             this.loadingLog = true;
             ipc.send('gtt-log');
+            ipc.send('gtt-sync');
         },
         loadResource() {
             if (this.resourceType) {

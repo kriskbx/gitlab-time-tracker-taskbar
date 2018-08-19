@@ -195,7 +195,7 @@ gtt.openContextMenu = () => {
 gtt.setTrayWindow = () => {
     trayWindow = new BrowserWindow({
         width: 370,
-        height: 800,
+        height: gtt._platform == 'win' ? 420 : 390,
         show: false,
         frame: false,
         resizable: false,
@@ -252,7 +252,7 @@ gtt.toggleTrayWindow = bounds => {
         y = bounds.y + 10;
 
         if (gtt._platform == 'win') {
-            y = bounds.y - 250;
+            y = bounds.y - 403;
         }
     } else {
         x = electron.screen.getCursorScreenPoint().x - (trayWindowBounds.width / 2);
@@ -352,6 +352,7 @@ gtt.sync = () => {
         .then(() => {
             gtt._syncing = false;
             gtt._lastSync = moment();
+            gtt._send('gtt-last-sync', gtt._lastSync.toISOString());
 
             if (gtt._tasks.sync.frames.length === 0)
                 return false;
