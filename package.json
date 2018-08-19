@@ -2,7 +2,7 @@
   "name": "gtt-taskbar",
   "productName": "gitlab time tracker taskbar",
   "description": "A crossplatform menubar/taskbar application for GitLabs time tracking feature.",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
