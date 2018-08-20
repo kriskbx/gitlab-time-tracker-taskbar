@@ -1,6 +1,9 @@
 os: unstable
 cache:
   - node_modules
+branches:
+  only:
+    - production
 environment:
   GITHUB_TOKEN:
     secure: G/hTb/AdUY4ynt5XGj10fROfQZC2xgogiQAiqXT63cEMGAGcZ8+6rOdQJzf4/PHf
@@ -20,4 +23,4 @@ version: '{build}'
 shallow_clone: true
 clone_depth: 1
 test_script:
-- ps: if($env:appveyor_repo_tag -eq 'True') { yarn run publish } else { echo "Not a tag build" }
+- ps: yarn run production && yarn run publish

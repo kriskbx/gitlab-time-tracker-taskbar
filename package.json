@@ -90,7 +90,9 @@
       },
       "github_repository": {
         "owner": "kriskbx",
-        "name": "gitlab-time-tracker-taskbar"
+        "name": "gitlab-time-tracker-taskbar",
+        "draft": false,
+        "prerelease": true
       },
       "windowsStoreConfig": {
         "packageName": "gtt-taskbar",
