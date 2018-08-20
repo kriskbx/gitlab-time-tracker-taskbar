@@ -5,6 +5,7 @@ branches:
   only:
     - production
 environment:
+  NODE_ENV: 'production'
   GITHUB_TOKEN:
     secure: G/hTb/AdUY4ynt5XGj10fROfQZC2xgogiQAiqXT63cEMGAGcZ8+6rOdQJzf4/PHf
   matrix:
@@ -23,5 +24,5 @@ version: '{build}'
 shallow_clone: true
 clone_depth: 1
 test_script:
-- ps: yarn run production
+- ps: webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js
 - ps: yarn run publish
