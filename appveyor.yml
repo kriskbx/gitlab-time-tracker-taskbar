@@ -23,4 +23,5 @@ version: '{build}'
 shallow_clone: true
 clone_depth: 1
 test_script:
-- ps: yarn run production && yarn run publish
+- ps: yarn run production
+- ps: yarn run publish
