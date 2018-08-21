@@ -24,5 +24,6 @@ version: '{build}'
 shallow_clone: true
 clone_depth: 1
 test_script:
+- dir
 - yarn run production-windows
 - yarn run publish
