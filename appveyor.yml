@@ -24,7 +24,5 @@ version: '{build}'
 shallow_clone: true
 clone_depth: 1
 test_script:
-- ps: echo %cd%
-- ps: dir node_modules/webpack/bin
-- ps: yarn run production-windows
-- ps: yarn run publish
+- yarn run production-windows
+- yarn run publish
