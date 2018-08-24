@@ -9,7 +9,7 @@ environment:
   GITHUB_TOKEN:
     secure: G/hTb/AdUY4ynt5XGj10fROfQZC2xgogiQAiqXT63cEMGAGcZ8+6rOdQJzf4/PHf
   matrix:
-    - nodejs_version: 8.4
+    - nodejs_version: 10.4
 install:
   - ps: Install-Product node $env:nodejs_version
   - set CI=true
