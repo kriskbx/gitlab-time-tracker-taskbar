@@ -10,15 +10,14 @@ environment:
     secure: G/hTb/AdUY4ynt5XGj10fROfQZC2xgogiQAiqXT63cEMGAGcZ8+6rOdQJzf4/PHf
   matrix:
     - nodejs_version: 10.4
-init:
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 install:
   - ps: Install-Product node $env:nodejs_version
   - set CI=true
   - npm install -g npm@latest
   - npm install -g yarn@1.7.0
   - set PATH=%APPDATA%\npm;%PATH%
-  - yarn install
+  - yarn install --production=false
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 matrix:
   fast_finish: true
 build: off
