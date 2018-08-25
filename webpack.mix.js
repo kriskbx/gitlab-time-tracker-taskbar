@@ -13,6 +13,7 @@ let mix = require('laravel-mix');
 
 mix.stylus('resources/assets/stylus/app.styl', 'src/build')
     .js('resources/assets/js/app.js', 'src/build')
+    .setPublicPath('src/build')
     .options({
-        processCssUrls: false
+        processCssUrls: false,
     });
