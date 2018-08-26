@@ -1,7 +1,7 @@
 {
   "env": {
     "development": {
-      "application/javascript": {
+      "application/javascript": {pack
         "presets": [
           [
             "env",
