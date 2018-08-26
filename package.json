@@ -107,7 +107,7 @@
   "dependencies": {
     "babel-preset-es2016": "^6.24.1",
     "chokidar": "^2.0.0",
-    "electron": "2.0.2",
+    "electron": "2.0.8",
     "electron-compile": "^6.4.2",
     "electron-log": "^2.2.14",
     "electron-squirrel-startup": "^1.0.0",
