@@ -17,6 +17,7 @@ install:
   - npm install -g npm@latest
   - npm install -g yarn@1.7.0
   - set PATH=%APPDATA%\npm;%PATH%
+  - set PATH=C:\Program Files (x86)\Windows Kits\10\bin\x86;C:\Program Files (x86)\Windows Kits\10\bin\x64;%PATH%
   - yarn install --production=false
   - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 matrix:
