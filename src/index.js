@@ -1,11 +1,13 @@
-if (require('electron-squirrel-startup')) process.exit();
+const electron = require('electron');
+const {app} = electron;
+
+if (require('electron-squirrel-startup')) app.quit();
 
 const Config = require('./writable-file-config');
 const Tasks = require('gitlab-time-tracker/src/include/tasks');
 const Base = require('gitlab-time-tracker/src/models/base');
 
-const electron = require('electron');
-const {app, dialog, Tray, BrowserWindow, Menu, ipcMain} = electron;
+const {dialog, Tray, BrowserWindow, Menu, ipcMain} = electron;
 const path = require('path');
 const events = require('events');
 const chokidar = require('chokidar');
@@ -20,6 +22,8 @@ log.transports.file.appName = 'gtt-taskbar';
 let gtt = new events.EventEmitter(),
     trayIcon = null,
     trayWindow = null,
+    trayWindowSize = null,
+    trayWindowOpen = false,
     trayPos = null,
     contextMenu = null,
     settingsWindow = null,
@@ -193,13 +197,19 @@ gtt.openContextMenu = () => {
  * Create and set the tray window.
  */
 gtt.setTrayWindow = () => {
+    trayWindowSize = {
+        w: 370,
+        h: gtt._platform == 'win' ? 420 : 390,
+    };
+
     trayWindow = new BrowserWindow({
-        width: 370,
-        height: gtt._platform == 'win' ? 420 : 390,
+        width: trayWindowSize.w,
+        height: trayWindowSize.h,
         show: false,
         frame: false,
         resizable: false,
         transparent: true,
+        skipTaskbar: true,
         icon: path.join(__dirname, '/icons/png/64x64.png')
     });
 
@@ -207,7 +217,10 @@ gtt.setTrayWindow = () => {
     if (debug) trayWindow.openDevTools();
 
     trayWindow.on('blur', function () {
-        if (!debug) trayWindow.hide();
+        if (!debug) {
+            trayWindow.hide();
+            setTimeout(() => trayWindowOpen = false, 100);
+        }
     });
 
     trayWindow.on('closed', function () {
@@ -245,6 +258,10 @@ gtt.setTray = () => {
  * @param bounds
  */
 gtt.toggleTrayWindow = bounds => {
+    if ((trayWindow && trayWindow.isVisible()) || trayWindowOpen) {
+        return;
+    }
+
     let x, y, trayWindowBounds = trayWindow.getBounds();
 
     if (gtt._platform != 'linux') {
@@ -264,12 +281,11 @@ gtt.toggleTrayWindow = bounds => {
         Math.ceil(y)
     );
 
-    if (trayWindow && trayWindow.isVisible()) {
-        return trayWindow.hide();
-    }
-
+    trayWindowOpen = true;
     trayWindow.setVisibleOnAllWorkspaces(true);
+    trayWindow.setSize(0, 0);
     trayWindow.show();
+    trayWindow.setSize(trayWindowSize.w, trayWindowSize.h);
     trayWindow.setVisibleOnAllWorkspaces(false);
 };
 
