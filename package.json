@@ -61,7 +61,7 @@
           "browser-support"
         ],
         "grade": "stable",
-        "desktopTemplate": "./.desktop"
+        "desktopTemplate": ".desktop"
       },
       "electronWinstallerConfig": {
         "name": "gtt-taskbar",
