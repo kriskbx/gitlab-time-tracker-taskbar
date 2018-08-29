@@ -10,7 +10,7 @@
 
 ## introduction
 
-gtt taskbar is an open source crossplatform (Linux, Mac OS, Windows) menubar/taskbar application for GitLab's time tracking feature based on the [gtt command line interface](https://github.com/kriskbx/gitlab-time-tracker).
+gtt taskbar is an open source crossplatform (Linux, Mac OS, Windows) menubar/taskbar application for GitLab's time tracking feature based on the **[gtt command line interface](https://github.com/kriskbx/gitlab-time-tracker)**.
 
 ![Linux, Mac OS, Windows](https://raw.githubusercontent.com/kriskbx/gitlab-time-tracker-taskbar/master/resources/images/preview/os.png)
 
