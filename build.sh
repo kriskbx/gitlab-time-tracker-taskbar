@@ -5,6 +5,6 @@ export DISPLAY=:99.0
 export DEBUG=electron-installer-snap:snapcraft
 sleep 5
 
-yarn install
+yarn install --force
 yarn run production
 yarn run publish

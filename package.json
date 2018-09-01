@@ -1,7 +1,16 @@
 {
   "name": "gtt-taskbar",
-  "productName": "gitlab time tracker taskbar",
+  "productName": "gtt-taskbar",
+  "genericName": "GitLab menubar/taskbar application",
   "description": "A crossplatform menubar/taskbar application for GitLabs time tracking feature.",
+  "homepage": "https://github.com/kriskbx/gitlab-time-tracker-taskbar",
+  "keywords": [
+    "GitLab",
+    "Timetracking"
+  ],
+  "author": "Kris Siepert",
+  "private": true,
+  "license": "GPL-2.0",
   "version": "0.3.4",
   "main": "src/index.js",
   "scripts": {
@@ -16,10 +25,6 @@
     "production": "NODE_ENV=production webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "production-windows": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
-  "keywords": [],
-  "author": "Kris Siepert",
-  "private": true,
-  "license": "GPL-2.0",
   "config": {
     "forge": {
       "publish_targets": {
@@ -56,34 +61,32 @@
         "packageManager": "yarn",
         "icon": "./resources/images/icon/icon.png"
       },
-      "electronInstallerSnap": {
-        "appPlugs": [
-          "browser-support"
-        ],
-        "grade": "stable",
-        "desktopTemplate": ".desktop"
-      },
       "electronWinstallerConfig": {
-        "name": "gtt-taskbar",
         "setupIcon": "./resources/images/icon/icon.ico"
       },
       "electronInstallerDebian": {
-        "icon": "./resources/images/icon/icon.png",
+        "depends": [
+          "libappindicator1"
+        ],
         "categories": [
           "Utility"
         ],
-        "homepage": "https://github.com/kriskbx/gitlab-time-tracker-taskbar"
+        "icon": "./resources/images/icon/icon.png"
       },
       "electronInstallerRedhat": {
-        "license": "GPL-2.0",
         "requires": [
           "lsb",
-          "libappindictor"
+          "libappindicator"
         ],
         "compressionLevel": 9,
         "categories": [
           "Utility"
         ]
+      },
+      "electronInstallerSnap": {
+        "grade": "stable",
+        "confinement": "strict",
+        "icon": "./resources/images/icon/icon.png"
       },
       "snapStore": {
         "release": "stable"
