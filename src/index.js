@@ -121,7 +121,7 @@ gtt.openAboutWindow = () => {
 
     aboutWindow.setMenu(null);
 
-    aboutWindow.loadURL('file://' + __dirname + '/about.html');
+    aboutWindow.loadURL('file://' + __dirname + '/test.html');
     if (debug) aboutWindow.openDevTools();
 
     aboutWindow.on('closed', function () {

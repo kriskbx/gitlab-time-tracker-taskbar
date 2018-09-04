@@ -16,7 +16,7 @@
         "plugins": [
           "transform-async-to-generator"
         ],
-        "sourceMaps": "inline"
+        "sourceMaps": "none"
       }
     },
     "production": {

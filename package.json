@@ -56,7 +56,18 @@
           ".idea",
           "resources",
           "out",
-          ".tresorit"
+          ".tresorit",
+          "appveyor.yml",
+          "build.sh",
+          "Dockerfile",
+          "documentation.md",
+          "Icon",
+          "LICENSE",
+          "mix-manifest.json",
+          "readme.md",
+          "webpack.mix.js",
+          "yarn.lock",
+          "yarn-error.log"
         ],
         "packageManager": "yarn",
         "icon": "./resources/images/icon/icon.png"
