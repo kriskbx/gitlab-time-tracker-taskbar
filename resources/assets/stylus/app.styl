@@ -282,9 +282,6 @@ body, html
 
 .log
 
-  .timeframe
-    color: $color-blue
-
   .sync
     font-size: 1.6rem
     .red
@@ -293,33 +290,105 @@ body, html
       color: green
 
   & > .day
-    overflow: hidden
-    box-shadow: 0 .05rem .3rem rgba(0, 0, 0, 0.4)
-    border-radius: .6rem
     margin-bottom: 2rem
+
     & > .headline
-      background: $color-light-gray
       color: $color-gray
-      font-weight: bold
       padding: 1rem
+      font-size: 2rem
       & > small
         font-weight: normal
         display: inline-block
-        float: right
-        margin-top: .3rem
+        margin-top: .9rem
+        margin-left: 1.2rem
+        font-size: 1.3rem
     & > .list
       & > .entry
+        letter-spacing: .05rem
         display: flex
         flex-direction: row
         width: 100%
-        border-bottom: 1px solid $color-light-gray
-        padding: .6rem 1rem
+        border-top: 1px solid rgba(0, 0, 0, 0.1)
+        padding: 1.4rem 1rem
         & > .cell
           flex: 1
+
+          &.timeframe
+            max-width: 13rem
+            color: $color-gray
+            font-size: 1.2rem
+            display: inline-block
+            margin-top: .3rem
+          &.sync
+            max-width: 10rem
+          &.time
+            font-weight: 400
+            max-width: 10rem
+          &.name
+            flex: auto
+            font-weight: 400
+
+        .actions
+          font-size: 1.2rem
+          display: none
+          float: right
+          margin: -.9rem 0
+          padding-right: 1rem
+          padding-top: .2rem
+          & > a
+            display: block
+
         &:hover
           background: lighten($color-light-gray, 40%)
-        &:last-child
-          border-bottom: 0
+
+          .actions
+            display: inline-block
 
 button.clear
   display: none
+
+.modal-bg
+  position: fixed
+  left: 0
+  right: 0
+  top: 0
+  bottom: 0
+  z-index: 10
+
+.modal
+  width: 45rem
+  height: auto
+  top: -.5rem
+  position: fixed
+  z-index: 20
+  left: 50%
+  margin-left: -22.5rem
+  background: $color-white
+  border-radius: .5rem
+  box-shadow: 0 .1rem .3rem rgba(0, 0, 0, 0.3)
+  padding: 2.5rem 3rem 2rem 3rem
+
+  .track-buttons
+    margin-top: 3rem
+
+  .form
+    .times
+      .vdatetime-slot__not-available, .vdatetime-slot__available
+        display: none
+      position: relative
+      z-index: 20
+      font-weight: 400
+      margin-bottom: 1rem
+      display: flex
+      text-align: center
+      align-items: center
+      & > *
+        flex: 1
+  .datetime
+    display: inline-block
+    min-width: 12rem
+    input
+      margin: 0
+  .content .track
+    padding: 0
+    position: static

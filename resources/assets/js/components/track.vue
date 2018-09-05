@@ -37,7 +37,7 @@
                       :options="resourceOptions"></v-select>
         </div>
 
-        <div class="step track-buttons">
+        <div class="step track-buttons" v-if="buttons">
             <button class="button start"
                     @click="start"
                     :class="{
@@ -106,6 +106,9 @@
             },
             running: {
                 default: false
+            },
+            buttons: {
+                default: true
             }
         },
 

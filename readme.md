@@ -20,8 +20,8 @@ How to install and use gtt taskbar? You can find the documentation [here](https:
 
 ## support further development
 
-Please support the development of this free software by [donating or sharing](https://github.com/kriskbx/gitlab-time-tracker-taskbar/blob/master/documentation.md#support-further-development)!
+Please support the development of this free software by [donating or sharing](https://github.com/kriskbx/gitlab-time-tracker-taskbar/blob/master/documentation.md#support-further-development)! 
 
 ## license
 
-gtt is open-source software licensed under the [GPL V2 license](https://github.com/kriskbx/gitlab-time-tracker-taskbar/blob/master/LICENSE).
+gtt taskbar is open-source software licensed under the [GPL V2 license](https://github.com/kriskbx/gitlab-time-tracker-taskbar/blob/master/LICENSE).

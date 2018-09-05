@@ -20,7 +20,11 @@ window.state = {
         version: false,
         log: null,
         platform: null,
-        lastSync: null
+        lastSync: null,
+        editing: false,
+        currentEntry: null,
+        entry: null,
+        ready: false
     },
     ipc: {
         sync(key, args) {
@@ -41,4 +45,4 @@ window.state = {
 };
 
 let cached = window.state.ipc.sync('cache-get', 'state');
-if (cached) window.state.data = Object.assign(window.state.data, cached);
+if (cached) window.state.data = Object.assign(window.state.data, cached, {ready: false});

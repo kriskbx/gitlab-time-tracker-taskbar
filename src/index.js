@@ -6,6 +6,7 @@ if (require('electron-squirrel-startup')) app.quit();
 const Config = require('./writable-file-config');
 const Tasks = require('gitlab-time-tracker/src/include/tasks');
 const Base = require('gitlab-time-tracker/src/models/base');
+const Frame = require('gitlab-time-tracker/src/models/frame');
 
 const {dialog, Tray, BrowserWindow, Menu, ipcMain} = electron;
 const path = require('path');
@@ -258,7 +259,7 @@ gtt.setTray = () => {
  * @param bounds
  */
 gtt.toggleTrayWindow = bounds => {
-    if ((trayWindow && trayWindow.isVisible()) || trayWindowOpen) {
+    if (!debug && ((trayWindow && trayWindow.isVisible()) || trayWindowOpen)) {
         return;
     }
 
@@ -435,6 +436,9 @@ gtt._send = (key, val) => {
 
     if (trayWindow)
         trayWindow.webContents.send(key, val);
+
+    if (listWindow)
+        listWindow.webContents.send(key, val);
 };
 
 gtt._watchers.config = {
@@ -543,7 +547,6 @@ ipcMain.on('gtt-merge-requests', (event, project) => {
             gtt._handleError(e)
         });
 });
-
 ipcMain.on('gtt-sync', event => {
     gtt.sync()
         .then(result => event.sender.send('gtt-sync', result))
@@ -574,6 +577,21 @@ ipcMain.on('gtt-log', event => {
     gtt.log()
         .then(log => event.sender.send('gtt-log', log))
         .catch(e => console.log(e));
+});
+ipcMain.on('gtt-edit', (event, {frame}) => {
+    gtt._dump(`Edited frame ${frame.id}`);
+    frame.start = frame._start;
+    frame.stop = frame._stop;
+    Frame.fromJson(gtt._config, frame).write();
+
+    setTimeout(() => {
+        gtt.sync()
+            .then(result => event.sender.send('gtt-sync', result))
+            .catch(e => {
+                event.sender.send('gtt-sync', false);
+                gtt._handleError(e);
+            });
+    }, 500);
 });
 ipcMain.on('list-window', () => {
     gtt.openListWindow();

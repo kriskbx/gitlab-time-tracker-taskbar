@@ -4,9 +4,10 @@ const Frame = require('gitlab-time-tracker/src/models/baseFrame');
 window.Vue = require('vue');
 window.Vue.use(require('vue-resource'));
 const moment = require('moment');
+const URL = require('url-parse');
 const _ = require('underscore');
 import ToggleButton from 'vue-js-toggle-button';
-import datetime from 'vuejs-datetimepicker';
+import {Datetime} from 'vue-datetime-2';
 
 window.Vue.use(ToggleButton);
 
@@ -19,40 +20,60 @@ const app = new Vue({
     components: {
         'content-track': require('./components/track.vue'),
         'panel-footer': require('./components/footer.vue'),
-        'datetime': datetime
+        'datetime': Datetime
     },
 
     watch: {
         'resourceType': function () {
             this.saveState();
         },
-        'resource': function () {
-            this.saveState();
+        'resource': {
+            deep: true,
+            handler: function () {
+                this.saveState();
+            }
         },
-        'mergeRequests': function () {
-            this.saveState();
+        'mergeRequests': {
+            deep: true,
+            handler: function () {
+                this.saveState();
+            }
         },
-        'issues': function () {
-            this.saveState();
+        'issues': {
+            deep: true,
+            handler: function () {
+                this.saveState();
+            }
         },
-        'projects': function () {
-            this.saveState();
+        'projects': {
+            deep: true,
+            handler: function () {
+                this.saveState();
+            }
         },
-        'project': function () {
-            this.loadResource();
-            this.saveState();
+        'project': {
+            deep: true,
+            handler: function () {
+                this.loadResource();
+                this.saveState();
+            }
         },
         'config': {
             deep: true,
             handler: function () {
-                if(this.loadingConfig) return;
+                if (this.loadingConfig) return;
                 this.writeConfig(this.config)
             }
         }
     },
 
     computed: {
+        gitlab() {
+          let url = new URL(this.config.get('url'), true);
+          return url.protocol + (url.slashes ? '//' : '') + url.host;
+        },
         days() {
+            let tmp = this.config;
             return this.log && this.log.frames ? Object.keys(this.log.frames).sort().reverse() : [];
         },
         frames() {
@@ -66,6 +87,7 @@ const app = new Vue({
         this.setConfig(ipc.sync('gtt-config', 'get'));
         this.version = ipc.sync('gtt-version', 'get');
         this.platform = ipc.sync('gtt-platform', 'get');
+        this.editing = false;
 
         // set ipc listeners
         ipc.on('gtt-last-sync', (event, lastSync) => this.lastSync = lastSync);
@@ -73,8 +95,8 @@ const app = new Vue({
         ipc.on('gtt-log', (event, data) => {
             this.loadingLog = false;
             let i;
-            for(i in data.frames) {
-                if(!data.frames.hasOwnProperty(i)) continue;
+            for (i in data.frames) {
+                if (!data.frames.hasOwnProperty(i)) continue;
                 data.frames[i] = _.map(data.frames[i], frame => Frame.copy(frame));
             }
             this.log = data;
@@ -107,6 +129,8 @@ const app = new Vue({
 
         ipc.on('gtt-stop', () => this.sync());
 
+        this.ready = true;
+
         if (this.$refs.log) this.loadLog();
         if (!this.$refs.main) return;
 
@@ -125,7 +149,7 @@ const app = new Vue({
 
     methods: {
         synced(modified) {
-            if(!this.lastSync) return;
+            if (!this.lastSync) return false;
             return moment(modified).diff(this.lastSync) < 0;
         },
         human(input) {
@@ -204,10 +228,44 @@ const app = new Vue({
         saveState() {
             let state = Object.assign({}, window.state.data);
             delete state.config;
+            delete state.editing;
+            delete state.entry;
+            delete state.currentEntry;
             ipc.send('cache-set', {key: 'state', data: state});
         },
         writeConfig(config) {
             ipc.send('gtt-config-write', config);
+        },
+        timeFormat() {
+            return this.config ? this.config.get('dateFormat').replace(this.dayFormat(), "") : "HH:mm";
+        },
+        dayFormat() {
+            return this.config ? this.config.get('dateFormat').replace(/([k|h|H|m|s|S][:]?)/gm, "") : 'YYYY-MM-DD';
+        },
+        getTitleById(id, project) {
+            if (!this.issues[project]) return false;
+
+            let filtered = this.issues[project].filter(issue => issue.iid == id);
+            if (!filtered[0]) return false;
+
+            return filtered[0].title;
+        },
+        edit(frame) {
+            this.editing = true;
+            this.currentEntry = frame;
+            this.entry = Frame.copy(frame);
+        },
+        save() {
+            for (let key in this.entry) {
+                if (!this.entry.hasOwnProperty(key)) continue;
+                this.currentEntry[key] = this.entry[key];
+            }
+            this.currentEntry.modified = moment().toISOString();
+            ipc.send('gtt-edit', {frame: this.currentEntry});
+            this.editing = false;
+        },
+        dump(data) {
+            console.log(data);
         }
     }
 });

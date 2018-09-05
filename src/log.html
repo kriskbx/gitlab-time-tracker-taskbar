@@ -7,36 +7,90 @@
     <link rel="stylesheet" href="build/app.css">
     <script type="text/javascript" src="render.js"></script>
 </head>
-<body class="window white">
+<body class="window">
 
-<div id="app">
+<div id="app" v-cloak>
     <div ref="log"></div>
+    <div ref="main"></div>
+
+    <div class="modal-bg" v-if="editing" @click.prevent="editing = false"></div>
+    <div class="modal" v-if="editing">
+        <div class="form">
+            <div class="times">
+                <span>From</span>
+                <datetime wrapper-class="datetime"
+                          type="datetime"
+                          v-model="entry._start"
+                          monday-first
+                ></datetime>
+
+                <span>to</span>
+                <datetime wrapper-class="datetime"
+                          type="datetime"
+                          v-model="entry._stop"
+                          monday-first
+                ></datetime>
+            </div>
+
+            <div class="content">
+                <!--<content-track @load-projects="loadProjects"-->
+                <!--@load-resource="loadResource"-->
+                <!--@update:project="v => entry.project = v.label"-->
+                <!--@update:resource="v => entry.resource.id = v ? v.id : false"-->
+                <!--@update:resource-type="v => entry.resource.type = v ? 'issue' : 'merge-request'"-->
+                <!--:resource="{id: entry.resource.id, type: entry.resource.type === 'issue', project: entry.project, last_activity: Date.now(), label: '#' + entry.resource.id + ' ' + getTitleById(entry.resource.id, entry.project), title: null}"-->
+                <!--:project="{label: entry.project, last_activity: Date.now()}"-->
+                <!--:projects="projects"-->
+                <!--:issues="issues"-->
+                <!--:merge-requests="mergeRequests"-->
+                <!--:resource-type="entry.resource.type === 'issue'"-->
+                <!--:loading-projects="loadingProjects"-->
+                <!--:loading-resource="loadingResource"-->
+                <!--:buttons="false"></content-track>-->
+
+                <div class="step track-buttons">
+                    <button class="button stop" @click.prevent="editing = false">Cancel</button>
+                    <button class="button start"
+                            :class="{ 'disabled': !entry || !entry.resource || !entry.resource.id }"
+                            @click.prevent="save()">Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="container" v-if="!loadingLog && log" v-cloak>
         <div class="log">
             <div class="day" v-for="day in days">
-                <div class="headline header">
-                    {{ moment(day).format('MMMM Do YYYY') }}
+
+                <div class="headline">
+                    {{ moment(day).format(dayFormat()) }}
                     <small>{{ human(log.times[day]) }}</small>
                 </div>
                 <div class="list">
                     <div class="entry" v-for="frame in frames[day]">
+                        <div class="cell name">
+                            {{ frame.project }} {{ frame.resource.type }} <a href="#"
+                                                                             @click.prevent="open(gitlab + '/' + frame.project + '/' + frame.resource.type.replace('-', '_') + 's/' + frame.resource.id)">#{{
+                            frame.resource.id }}</a>
+                        </div>
+                        <div class="cell time">
+                            {{ human(parseInt(moment(frame.stop).diff(frame.start) / 1000)) }}
+                        </div>
                         <div class="cell timeframe">
-                            {{ moment(frame.start).format('HH:mm') }} &nbsp; - &nbsp; {{ moment(frame.stop).format('HH:mm') }}
+                            {{ moment(frame.start).format(timeFormat()) }} - {{ moment(frame.stop).format(timeFormat())
+                            }}
                         </div>
-                        <div class="cell">
-                            ( {{ human(parseInt(moment(frame.stop).diff(frame.start) / 1000)) }} )
-                        </div>
-                        <div class="cell">
-                            {{ frame.project }}
-                        </div>
-                        <div class="cell">
-                            {{ frame.resource.type }} #{{ frame.resource.id }}
-                        </div>
-                        <div class="cell">
-                            <span class="sync" v-if="frame.modified">
-                                <i title="Record is in sync with GitLab" class="fa fa-check-circle green" v-if="synced(frame.modified)"></i>
-                                <i title="Record not synced with Gitlab" class="fa fa-times-circle red" v-if="!synced(frame.modified)"></i>
+                        <div class="cell sync">
+                            <span v-if="frame.modified">
+                                <i title="Record is in sync with GitLab" class="fa fa-check-circle green"
+                                   v-if="synced(frame.modified)"></i>
+                                <i title="Record not synced with Gitlab" class="fa fa-times-circle red"
+                                   v-if="!synced(frame.modified)"></i>
+                            </span>
+                            <span class="actions">
+                                <a href="#" @click.prevent="edit(frame)">edit</a>
+                                <!--<a href="#">delete</a>-->
                             </span>
                         </div>
                     </div>
