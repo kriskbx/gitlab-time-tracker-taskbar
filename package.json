@@ -46,7 +46,6 @@
           "zip"
         ],
         "linux": [
-//          "snap",
           "deb",
           "rpm"
         ]
