@@ -73,10 +73,37 @@ app.on('ready', () => {
         gtt._dump('Running on ' + gtt._platform);
         gtt.setTrayWindow();
         gtt.setTray();
+        gtt.addApplicationMenu();
         gtt._watchers.config.add();
         gtt._watchers.frames.add();
     }, 100);
 });
+
+/**
+ * Add application menu
+ */
+gtt.addApplicationMenu = () => {
+    let template = [{
+        label: "gtt taskbar",
+        submenu: [
+            { label: "About gtt taskbar", selector: "orderFrontStandardAboutPanel:" },
+            { type: "separator" },
+            { label: "Quit", accelerator: "Command+Q", click: function() { app.quit(); }}
+        ]}, {
+        label: "Edit",
+        submenu: [
+            { label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:" },
+            { label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", selector: "redo:" },
+            { type: "separator" },
+            { label: "Cut", accelerator: "CmdOrCtrl+X", selector: "cut:" },
+            { label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:" },
+            { label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:" },
+            { label: "Select All", accelerator: "CmdOrCtrl+A", selector: "selectAll:" }
+        ]}
+    ];
+
+    Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+};
 
 /**
  * Create and open the list window.
