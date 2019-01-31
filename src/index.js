@@ -30,7 +30,7 @@ let gtt = new events.EventEmitter(),
     settingsWindow = null,
     aboutWindow = null,
     listWindow = null,
-    debug = false;
+    debug = true;
 
 gtt._app = app;
 gtt._version = pjson.version;
