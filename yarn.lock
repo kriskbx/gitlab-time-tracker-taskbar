@@ -2073,7 +2073,7 @@ commander@2.8.x, commander@~2.8.1:
   dependencies:
     graceful-readlink ">= 1.0.0"
 
-commander@^2.14.1, commander@^2.2.0, "commander@github:kriskbx/commander.js":
+commander@^2.14.1, commander@^2.2.0, commander@kriskbx/commander.js:
   version "2.19.0"
   resolved "https://codeload.github.com/kriskbx/commander.js/tar.gz/2275da95973c27e40e13a4195768947aa39672d0"
 
@@ -3357,9 +3357,9 @@ electron-installer-snap@^2.0.0:
     which "^1.3.0"
     yargs "^11.0.0"
 
-electron-log@^2.2.14:
-  version "2.2.16"
-  resolved "https://registry.yarnpkg.com/electron-log/-/electron-log-2.2.16.tgz#c44ffdea51ae90cbe851d25e7cd1bab56fdb328f"
+electron-log@^3.0.0:
+  version "3.0.0-beta4"
+  resolved "https://registry.yarnpkg.com/electron-log/-/electron-log-3.0.0-beta4.tgz#140ebc58ff4559a33ceb827cbfc6f869b5c100f9"
 
 electron-osx-sign@^0.4.1:
   version "0.4.10"

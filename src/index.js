@@ -18,8 +18,6 @@ const moment = require('moment');
 const log = require('electron-log');
 const pjson = require('../package.json');
 
-log.transports.file.appName = 'gtt-taskbar';
-
 let gtt = new events.EventEmitter(),
     trayIcon = null,
     trayWindow = null,
@@ -643,6 +641,8 @@ ipcMain.on('cache-set', (event, {key, data}) => {
 });
 
 process.on('uncaughtException', function (e) {
+    log.warn("error: " + JSON.stringify(e));
+
     if (dialog.showMessageBox(null, {
         type: "error",
         title: "Error",
