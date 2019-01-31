@@ -442,8 +442,9 @@ gtt.writeConfig = (config) => {
  * Cache wrapper.
  */
 gtt.cache = {
+    delete: (key) => gtt._config.cache.delete(key),
     get: (key) => gtt._config.cache.get(key),
-    set: (key, value) => gtt._config.cache.set(key, value)
+    set: (key, value) => gtt._config.cache.set(key, value),
 };
 
 /**
@@ -630,7 +631,12 @@ ipcMain.on('context-menu', () => {
     gtt.openContextMenu();
 });
 ipcMain.on('cache-get', (event, key) => {
-    event.returnValue = gtt.cache.get(key);
+    try {
+        event.returnValue = gtt.cache.get(key);
+    } catch(e) {
+        gtt.cache.delete(key);
+        event.returnValue = null;
+    }
 });
 ipcMain.on('cache-set', (event, {key, data}) => {
     gtt.cache.set(key, data);
